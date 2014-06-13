@@ -11,7 +11,7 @@
          Needs to become installed into the IDE and TargetPlatform
       </description>
    </category-def>
-   <category-def name="lunifera-xtext-builder" label="Lunifera Xtext Runtime Builder">
+   <category-def name="lunifera-xtext-builder" label="Lunifera Xtext Runtime Builder (Never IDE)">
       <description>
          Never install into the IDE… Will cause problems with XtextIDEBuilder.
       </description>
