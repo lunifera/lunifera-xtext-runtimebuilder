@@ -11,12 +11,12 @@
 #     Cristiano Gavião - initial API and implementation
 #====================================================================== 
 -->
-<project default="basic.build" name="Lunifera DSLs P2 with aggregate repositories">
+<project default="basic.build" name="Lunifera Runtime Web P2 with aggregate repositories">
 
 	<taskdef resource="net/sf/antcontrib/antlib.xml"/>
 	
 	<target name="init">
-		<property name="update.site.source.dir" value="${lunifera.build.p2.source.dir}" />
+		<property name="update.site.source.dir" value="${lunifera.deployment.p2.origin.dir}" />
 
 		<echo>Loaded associate sites: ${associate.sites}</echo>
 		<echo>Source dir: ${update.site.source.dir}</echo>
@@ -54,8 +54,7 @@
 					</filterchain>
 				</loadfile>
 				<echo file="${update.site.source.dir}/content.xml" message="${content.xml}" />
-				<echo file="${update.site.source.dir}/content.xml" append="true">  &lt;references size='${associate.sites.length}'>
-</echo>
+				<echo file="${update.site.source.dir}/content.xml" append="true">  &lt;references size='${associate.sites.length}'></echo>
 				<for param="associate.site" list="${associate.sites}" delimiter=",">
 					<sequential>
 						<!-- insert into content.xml -->
@@ -63,13 +62,10 @@
 						<echo>Adding associate p2: @{associate.site}</echo>
 						
 						<echo file="${update.site.source.dir}/content.xml" append="true">    &lt;repository uri='@{associate.site}' url='@{associate.site}' type='0' options='1'/>
-    &lt;repository uri='@{associate.site}' url='@{associate.site}' type='1' options='1'/>
-</echo>
+    &lt;repository uri='@{associate.site}' url='@{associate.site}' type='1' options='1'/></echo>
 					</sequential>
 				</for>
-				<echo file="${update.site.source.dir}/content.xml" append="true">  &lt;/references>
-&lt;/repository>
-</echo>
+				<echo file="${update.site.source.dir}/content.xml" append="true">  &lt;/references>&lt;/repository></echo>
 			</then>
 		</if>
 	</target>

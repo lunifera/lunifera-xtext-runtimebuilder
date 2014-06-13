@@ -95,8 +95,8 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
-				<lunifera.build.p2.source.dir>${project.build.directory}/repository</lunifera.build.p2.source.dir>
-				<associate.p2>${lunifera.build.eclipse.platform.p2.url},${orbit-site},${xtext-milestone-p2}</associate.p2>
+				<lunifera.deployment.p2.origin.dir>${project.build.directory}/repository</lunifera.deployment.p2.origin.dir>
+				<associate.p2>${lunifera.build.eclipse.platform.p2.url},${orbit-site},${ecfview-p2}</associate.p2>
 			</properties>
 			<build>
 				<plugins>
@@ -104,12 +104,14 @@
 						<artifactId>maven-antrun-plugin</artifactId>
 						<executions>
 							<execution>
-								<phase>verify</phase>
+								<id>create.p2.inf</id>
+								<phase>package</phase>
 								<configuration>
 									<quiet>true</quiet>
 									<target>
 										<ant antfile="build.xml" target="basic.build" dir=".">
-											<property name="lunifera.build.p2.source.dir" value="${lunifera.build.p2.source.dir}" />
+											<property name="lunifera.deployment.p2.origin.dir"
+												value="${lunifera.deployment.p2.origin.dir}" />
 											<property name="associate.sites" value="${associate.p2}" />
 										</ant>
 									</target>
