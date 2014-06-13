@@ -38,7 +38,8 @@
 				<module>org.lunifera.xtext.builder.types.bundles</module>
 
 				<!-- P2 feature -->
-				<module>org.lunifera.xtext.builder.feature</module>
+				<module>org.lunifera.xtext.builder.feature.types</module>
+				<module>org.lunifera.xtext.builder.feature.runtime</module>
 			</modules>
 		</profile>
 	

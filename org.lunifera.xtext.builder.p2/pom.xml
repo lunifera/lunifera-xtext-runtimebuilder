@@ -14,16 +14,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.lunifera.xtext.builder</groupId>
-		<artifactId>org.lunifera.xtext.builder.parent</artifactId>
+		<groupId>org.lunifera.releng.maven</groupId>
+		<artifactId>org.lunifera.releng.maven.parent.tycho.repository.p2</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>org.lunifera.xtext.builder.parent</artifactId>
+	<artifactId>org.lunifera.xtext.builder.p2</artifactId>
 	<packaging>eclipse-repository</packaging>
 
 	<properties>
-		<lunifera.deployment.p2.label>dsl</lunifera.deployment.p2.label>
+		<lunifera.deployment.p2.label>runtime-builder</lunifera.deployment.p2.label>
 		<xtext-milestone-p2>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/</xtext-milestone-p2>
 	</properties>
 
@@ -160,46 +160,46 @@
 		</dependencies>
 	</dependencyManagement>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.lunifera.dsl</groupId>
-			<artifactId>org.lunifera.dsl.feature.eclipse.ui</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.lunifera.dsl</groupId>
-			<artifactId>org.lunifera.dsl.feature.common</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.lunifera.dsl</groupId>
-			<artifactId>org.lunifera.dsl.feature.common.headless</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.lunifera.dsl</groupId>
-			<artifactId>org.lunifera.dsl.feature.entities</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.lunifera.dsl</groupId>
-			<artifactId>org.lunifera.dsl.feature.entities.headless</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.lunifera.dsl</groupId>
-			<artifactId>org.lunifera.dsl.feature.dto</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.lunifera.dsl</groupId>
-			<artifactId>org.lunifera.dsl.feature.dto.headless</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.lunifera.dsl</groupId>
-			<artifactId>org.lunifera.dsl.feature.metadata</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-	</dependencies>
+	<!-- <dependencies> -->
+	<!-- <dependency> -->
+	<!-- <groupId>org.lunifera.dsl</groupId> -->
+	<!-- <artifactId>org.lunifera.dsl.feature.eclipse.ui</artifactId> -->
+	<!-- <version>${project.version}</version> -->
+	<!-- </dependency> -->
+	<!-- <dependency> -->
+	<!-- <groupId>org.lunifera.dsl</groupId> -->
+	<!-- <artifactId>org.lunifera.dsl.feature.common</artifactId> -->
+	<!-- <version>${project.version}</version> -->
+	<!-- </dependency> -->
+	<!-- <dependency> -->
+	<!-- <groupId>org.lunifera.dsl</groupId> -->
+	<!-- <artifactId>org.lunifera.dsl.feature.common.headless</artifactId> -->
+	<!-- <version>${project.version}</version> -->
+	<!-- </dependency> -->
+	<!-- <dependency> -->
+	<!-- <groupId>org.lunifera.dsl</groupId> -->
+	<!-- <artifactId>org.lunifera.dsl.feature.entities</artifactId> -->
+	<!-- <version>${project.version}</version> -->
+	<!-- </dependency> -->
+	<!-- <dependency> -->
+	<!-- <groupId>org.lunifera.dsl</groupId> -->
+	<!-- <artifactId>org.lunifera.dsl.feature.entities.headless</artifactId> -->
+	<!-- <version>${project.version}</version> -->
+	<!-- </dependency> -->
+	<!-- <dependency> -->
+	<!-- <groupId>org.lunifera.dsl</groupId> -->
+	<!-- <artifactId>org.lunifera.dsl.feature.dto</artifactId> -->
+	<!-- <version>${project.version}</version> -->
+	<!-- </dependency> -->
+	<!-- <dependency> -->
+	<!-- <groupId>org.lunifera.dsl</groupId> -->
+	<!-- <artifactId>org.lunifera.dsl.feature.dto.headless</artifactId> -->
+	<!-- <version>${project.version}</version> -->
+	<!-- </dependency> -->
+	<!-- <dependency> -->
+	<!-- <groupId>org.lunifera.dsl</groupId> -->
+	<!-- <artifactId>org.lunifera.dsl.feature.metadata</artifactId> -->
+	<!-- <version>${project.version}</version> -->
+	<!-- </dependency> -->
+	<!-- </dependencies> -->
 </project>

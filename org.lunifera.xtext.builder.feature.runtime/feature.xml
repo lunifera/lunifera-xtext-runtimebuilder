@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.lunifera.xtext.builder.feature"
+      id="org.lunifera.xtext.builder.feature.runtime"
       label="%featureName"
       version="0.0.1.qualifier"
       provider-name="%providerName">
@@ -28,12 +28,5 @@
       <import feature="org.eclipse.xtend.sdk" version="2.5.0" match="greaterOrEqual"/>
       <import feature="org.eclipse.emf.ecore.xcore.sdk" version="1.1.2"/>
    </requires>
-
-   <plugin
-         id="org.lunifera.xtext.builder.metadata.services"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
 </feature>

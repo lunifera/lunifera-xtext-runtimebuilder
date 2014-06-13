@@ -1,58 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature id="org.lunifera.dsl.feature.eclipse.ui" version="0.0.0">
-      <category name="lunifera-dsls"/>
+   <feature id="org.lunifera.xtext.builder.feature.types" version="0.0.0">
+      <category name="lunifera-xtext-typeprovider"/>
    </feature>
-   <feature id="org.lunifera.dsl.feature.eclipse.ui.source" version="0.0.0">
-      <category name="lunifera-dsls"/>
+   <feature id="org.lunifera.xtext.builder.feature.runtime" version="0.0.0">
+      <category name="lunifera-xtext-builder"/>
    </feature>
-   <feature id="org.lunifera.dsl.feature.dto" version="0.0.0">
-      <category name="lunifera-dsls"/>
-   </feature>
-   <feature id="org.lunifera.dsl.feature.dto.source" version="0.0.0">
-      <category name="lunifera-dsls"/>
-   </feature>
-   <feature id="org.lunifera.dsl.feature.dto.headless" version="0.0.0">
-      <category name="lunifera-dsls-headless"/>
-   </feature>
-   <feature id="org.lunifera.dsl.feature.dto.headless.source" version="0.0.0">
-      <category name="lunifera-dsls-headless"/>
-   </feature>
-   <feature id="org.lunifera.dsl.feature.entities" version="0.0.0">
-      <category name="lunifera-dsls"/>
-   </feature>
-   <feature id="org.lunifera.dsl.feature.entities.source" version="0.0.0">
-      <category name="lunifera-dsls"/>
-   </feature>
-   <feature id="org.lunifera.dsl.feature.entities.headless" version="0.0.0">
-      <category name="lunifera-dsls-headless"/>
-   </feature>
-   <feature id="org.lunifera.dsl.feature.entities.headless.source" version="0.0.0">
-      <category name="lunifera-dsls-headless"/>
-   </feature>
-   <feature id="org.lunifera.dsl.feature.common" version="0.0.0">
-      <category name="lunifera-dsls"/>
-   </feature>
-   <feature id="org.lunifera.dsl.feature.common.source" version="0.0.0">
-      <category name="lunifera-dsls"/>
-   </feature>
-   <feature id="org.lunifera.dsl.feature.common.headless" version="0.0.0">
-      <category name="lunifera-dsls-headless"/>
-   </feature>
-   <feature id="org.lunifera.dsl.feature.common.headless.source" version="0.0.0">
-      <category name="lunifera-dsls-headless"/>
-   </feature>
-   <feature id="org.lunifera.dsl.feature.metadata" version="0.0.0">
-      <category name="lunifera-dsls-metadata"/>
-   </feature>
-    <feature id="org.lunifera.dsl.feature.metadata.source" version="0.0.0">
-      <category name="lunifera-dsls-metadata"/>
-   </feature>
-   <category-def name="lunifera-dsls" label="Lunifera DSLs"/>
-   <category-def name="lunifera-dsls-headless" label="Lunifera DSLs - Headless for Target Platform"/>
-   <category-def name="lunifera-dsls-metadata" label="Metadata Cache">
+   <category-def name="lunifera-xtext-typeprovider" label="BundleSpaceTypeProvider">
       <description>
-         Metadata Cache that indexes the runtime and provides access to that information.
+         Needs to become installed into the IDE and TargetPlatform
+      </description>
+   </category-def>
+   <category-def name="lunifera-xtext-builder" label="Lunifera Xtext Runtime Builder">
+      <description>
+         Never install into the IDE… Will cause problems with XtextIDEBuilder.
       </description>
    </category-def>
 </site>

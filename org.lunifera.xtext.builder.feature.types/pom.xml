@@ -20,7 +20,7 @@
 		<relativePath>../org.lunifera.xtext.builder.parent/pom.xml</relativePath>
 	</parent>
 
-	<artifactId>org.lunifera.xtext.builder.feature</artifactId>
+	<artifactId>org.lunifera.xtext.builder.feature.types</artifactId>
 	<packaging>eclipse-feature</packaging>
 	<build>
 		<plugins>
