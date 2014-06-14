@@ -13,29 +13,60 @@ package org.lunifera.xtext.builder.metadata.services.impl;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
+import org.eclipse.xtext.service.AbstractGenericModule;
+import org.eclipse.xtext.service.SingletonBinding;
 import org.lunifera.dsl.xtext.types.bundles.BundleSpaceTypeProviderFactory;
 import org.lunifera.dsl.xtext.types.bundles.BundleSpaceTypeScopeProvider;
+import org.lunifera.xtext.builder.metadata.services.IMetadataBuilderService;
 
-import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
 
 @SuppressWarnings("restriction")
-public class MetadataBuilderModule extends AbstractModule {
+public class MetadataBuilderModule extends AbstractGenericModule {
 
-	protected void configure() {
-		bind(IResourceDescriptions.class).annotatedWith(
-				Names.named(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE))
-				.to(ResourceSetBasedResourceDescriptions.class);
-		bind(IResourceDescriptions.class).annotatedWith(
-				Names.named(ResourceDescriptionsProvider.LIVE_SCOPE)).to(
-				ResourceSetBasedResourceDescriptions.class);
-		bind(IResourceDescriptions.class).to(
-				ResourceSetBasedResourceDescriptions.class);
-		bind(AbstractTypeScopeProvider.class).to(
-				BundleSpaceTypeScopeProvider.class);
-		bind(IJvmTypeProvider.Factory.class).to(
-				BundleSpaceTypeProviderFactory.class);
+	private IMetadataBuilderService service;
+
+	public MetadataBuilderModule(IMetadataBuilderService service) {
+		this.service = service;
 	}
+
+	public void configureIMetaBuilderService(com.google.inject.Binder binder) {
+		binder.bind(IMetadataBuilderService.class).toInstance(service);
+	}
+
+	public void configureNamedProviderScope(com.google.inject.Binder binder) {
+		binder.bind(IResourceDescriptions.class)
+				.annotatedWith(
+						Names.named(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE))
+				.to(ResourceSetBasedResourceDescriptions.class);
+	}
+
+	public void configureLiveProviderScope(com.google.inject.Binder binder) {
+		binder.bind(IResourceDescriptions.class)
+				.annotatedWith(
+						Names.named(ResourceDescriptionsProvider.LIVE_SCOPE))
+				.to(ResourceSetBasedResourceDescriptions.class);
+	}
+
+	@SingletonBinding
+	public Class<? extends IResourceDescriptions> bindIResourceDescriptions() {
+		return ResourceSetBasedResourceDescriptions.class;
+	}
+
+	public Class<? extends AbstractTypeScopeProvider> bindAbstractTypeScopeProvider() {
+		return BundleSpaceTypeScopeProvider.class;
+	}
+
+	public Class<? extends IJvmTypeProvider.Factory> bindbindIJvmTypeProvider$Factory() {
+		return BundleSpaceTypeProviderFactory.class;
+	}
+
+	@SingletonBinding
+	public Class<? extends XtextResourceSet> bindbindXtextResourceSet() {
+		return XtextResourceSet.class;
+	}
+
 }

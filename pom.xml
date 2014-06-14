@@ -37,10 +37,15 @@
 				<module>org.lunifera.xtext.builder.metadata.services</module>
 				<module>org.lunifera.xtext.builder.types.bundles</module>
 				<module>org.lunifera.xtext.builder.participant.jvmtypes</module>
+				
+				<module>org.lunifera.xtext.builder.participant.jvmtypes.tests</module>
+				<module>org.lunifera.xtext.builder.participant.jvmtypes.extender.tests</module>
 								
 				<!-- P2 feature -->
 				<module>org.lunifera.xtext.builder.feature.types</module>
 				<module>org.lunifera.xtext.builder.feature.runtime</module>
+				<module>org.lunifera.xtext.builder.feature.service.jvmtypes</module>
+				
 			</modules>
 		</profile>
 	

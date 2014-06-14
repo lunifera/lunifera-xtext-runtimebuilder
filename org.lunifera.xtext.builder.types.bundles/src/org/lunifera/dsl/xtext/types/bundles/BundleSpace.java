@@ -13,19 +13,29 @@
  */
 package org.lunifera.dsl.xtext.types.bundles;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.access.impl.ClassNameUtil;
 import org.eclipse.xtext.common.types.access.impl.Primitives;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.osgi.framework.Bundle;
+
+import com.google.inject.Inject;
 
 @SuppressWarnings("restriction")
 public class BundleSpace {
 
 	protected static final ClassNotFoundException CACHED_EXCEPTION = new ClassNotFoundException();
 	private static final Class<?> NULL_CLASS;
+	@Inject
+	private XtextResourceSet resourceSet;
 
 	static {
 		class Null {
@@ -33,53 +43,96 @@ public class BundleSpace {
 		NULL_CLASS = Null.class;
 	}
 
-	private final Set<Bundle> bundles;
+	private final Set<Bundle> bundles = Collections
+			.synchronizedSet(new HashSet<Bundle>());
 	private final ClassNameUtil classNameUtil;
 	private final Class<?> nullValue;
-	private final Map<String, Class<?>> cache;
+	private final Cache cache;
 
-	public BundleSpace(Set<Bundle> bundles) {
-		this.bundles = bundles;
+	public BundleSpace() {
 		this.nullValue = NULL_CLASS;
 		this.cache = new Cache();
 		this.classNameUtil = new ClassNameUtil();
 	}
 
 	public Class<?> forName(String name) throws ClassNotFoundException {
-		Class<?> result = cache.get(name);
-		if (result != null) {
-			if (result == nullValue)
-				throw CACHED_EXCEPTION;
-			return result;
-		}
-
-		for (Bundle bundle : bundles) {
-			try {
-				result = bundle.loadClass(classNameUtil
-						.normalizeClassName(name));
-				if (result != null) {
-					break;
-				}
-			} catch (ClassNotFoundException e) {
-				// nothing to do
+		Class<?> result = null;
+		synchronized (cache) {
+			result = cache.get(name);
+			if (result != null) {
+				if (result == nullValue)
+					throw CACHED_EXCEPTION;
+				return result;
 			}
-		}
 
-		if (result != null) {
-			cache.put(name, result);
-		} else {
-			cache.put(name, NULL_CLASS);
-			throw CACHED_EXCEPTION;
+			synchronized (bundles) {
+				for (Bundle bundle : bundles) {
+					try {
+						result = bundle.loadClass(classNameUtil
+								.normalizeClassName(name));
+						if (result != null) {
+							break;
+						}
+					} catch (ClassNotFoundException e) {
+						// nothing to do
+					}
+				}
+			}
+
+			if (result != null) {
+				cache.put(name, result);
+			} else {
+				cache.put(name, NULL_CLASS);
+				throw CACHED_EXCEPTION;
+			}
 		}
 		return result;
 	}
 
+	public void add(Bundle bundle) {
+		bundles.add(bundle);
+
+		synchronized (cache) {
+			cache.resetNullValue();
+		}
+	}
+
+	public void remove(Bundle bundle) {
+		bundles.remove(bundle);
+	}
+
 	@SuppressWarnings("serial")
-	private static class Cache extends HashMap<String, Class<?>> {
+	private class Cache extends HashMap<String, Class<?>> {
 		public Cache() {
 			super(500);
 			for (Class<?> primitiveType : Primitives.ALL_PRIMITIVE_TYPES) {
 				put(primitiveType.getName(), primitiveType);
+			}
+		}
+
+		public void resetNullValue() {
+			for (Iterator<Map.Entry<String, Class<?>>> iterator = entrySet()
+					.iterator(); iterator.hasNext();) {
+				Map.Entry<String, Class<?>> entry = iterator.next();
+				if (entry.getValue() == NULL_CLASS) {
+					unloadClassResource(entry);
+					iterator.remove();
+				}
+			}
+		}
+
+		/**
+		 * Unloads the class resource.
+		 * 
+		 * @param entry
+		 */
+		private void unloadClassResource(Map.Entry<String, Class<?>> entry) {
+			Resource resource = resourceSet.getResource(
+					URI.createURI(String.format("java://%s/Objects/%s",
+							entry.getKey(), entry.getKey())), false);
+			if (resource != null) {
+				resource.unload();
+				resourceSet.getResources().remove(resource);
 			}
 		}
 	}

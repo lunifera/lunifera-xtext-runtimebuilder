@@ -12,11 +12,25 @@ package org.lunifera.xtext.builder.metadata.services;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.lunifera.dsl.xtext.types.bundles.BundleSpace;
+import org.osgi.framework.Bundle;
 
 /**
- * Returns the metadata model for the given fully qualified name and type.
+ * A service that handles the runtime build of Xtext models or Ecore models. It
+ * uses delegates to extend the types of models that may become handled.
+ * {@link IBuilderParticipant} have to become registered as an OSGi service.
+ * Guice injection is enabled. After a participant was added to the service,
+ * injections will be done.
  */
+@SuppressWarnings("restriction")
 public interface IMetadataBuilderService {
+
+	/**
+	 * Bundles that add this header to their MANIFEST are added to the
+	 * BundleSpace of the builder. So class loading issues are forwareded to
+	 * this bundle.
+	 */
+	public static final String LUN_RUNTIME_BUILDER_BUNDLE_SPACE = "Lun-RuntimeBuilder-BundleSpace";
 
 	/**
 	 * Returns the resolved model or <code>null</code> if the model could not be
@@ -27,5 +41,24 @@ public interface IMetadataBuilderService {
 	 * @return
 	 */
 	EObject getMetadata(String qualifiedName, EClass type);
+
+	/**
+	 * Adds the given bundle to the {@link BundleSpace}, so it may be used to
+	 * resolved classes. Note, that also
+	 * {@link #LUN_RUNTIME_BUILDER_BUNDLE_SPACE} MANIFEST header may be used, to
+	 * add a bundle to the {@link BundleSpace}. This method allows
+	 * {@link IBuilderParticipant} to add additional bundles that do not provide
+	 * the header.
+	 * 
+	 * @param bundle
+	 */
+	void addToBundleSpace(Bundle bundle);
+
+	/**
+	 * Removes the given bundle from the {@link BundleSpace}.
+	 * 
+	 * @param bundle
+	 */
+	void removeFromBundleSpace(Bundle bundle);
 
 }
