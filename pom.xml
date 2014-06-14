@@ -22,6 +22,27 @@
 	<artifactId>org.lunifera.xtext.builder.aggregator</artifactId>
 	<packaging>pom</packaging>
 
+	<modules>
+		<module>org.lunifera.xtext.builder.parent</module>
+		<!-- P2 bundles -->
+		<module>org.lunifera.xtext.builder.metadata.services</module>
+		<module>org.lunifera.xtext.builder.types.bundles</module>
+		<module>org.lunifera.xtext.builder.participant.jvmtypes</module>
+		<module>org.lunifera.xtext.builder.participant.xbase</module>
+
+		<module>org.lunifera.xtext.builder.participant.jvmtypes.tests</module>
+		<module>org.lunifera.xtext.builder.participant.jvmtypes.extender.tests</module>
+		<module>org.lunifera.xtext.builder.participant.xbase.tests</module>
+		<module>org.lunifera.xtext.builder.participant.xbase.extender.tests</module>
+
+		<!-- P2 feature -->
+		<module>org.lunifera.xtext.builder.feature.types</module>
+		<module>org.lunifera.xtext.builder.feature.runtime</module>
+		<module>org.lunifera.xtext.builder.feature.service.jvmtypes</module>
+		<module>org.lunifera.xtext.builder.feature.service.xbase</module>
+
+	</modules>
+
 	<profiles>
 		<profile>
 			<id>build.features</id>
@@ -38,10 +59,10 @@
 				<module>org.lunifera.xtext.builder.types.bundles</module>
 				<module>org.lunifera.xtext.builder.participant.jvmtypes</module>
 				<module>org.lunifera.xtext.builder.participant.xbase</module>
-				
+
 				<module>org.lunifera.xtext.builder.participant.jvmtypes.tests</module>
 				<module>org.lunifera.xtext.builder.participant.jvmtypes.extender.tests</module>
-				<module>org.lunifera.xtext.builder.participant.xbase.tests</module>	
+				<module>org.lunifera.xtext.builder.participant.xbase.tests</module>
 				<module>org.lunifera.xtext.builder.participant.xbase.extender.tests</module>
 
 				<!-- P2 feature -->
@@ -49,10 +70,10 @@
 				<module>org.lunifera.xtext.builder.feature.runtime</module>
 				<module>org.lunifera.xtext.builder.feature.service.jvmtypes</module>
 				<module>org.lunifera.xtext.builder.feature.service.xbase</module>
-			
+
 			</modules>
 		</profile>
-	
+
 		<profile>
 			<id>build.p2</id>
 			<activation>
