@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.lunifera.xtext.builder.feature.service.jvmtypes"
+      label="%featureName"
+      version="0.0.1.qualifier"
+      provider-name="%providerName">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <url>
+      <discovery label="Xtext 2.5.0" url="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"/>
+      <discovery label="Kepler" url="http://download.eclipse.org/releases/kepler"/>
+   </url>
+
+   <requires>
+      <import feature="org.eclipse.xtext.sdk" version="2.5.4" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="org.lunifera.xtext.builder.types.bundles"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
