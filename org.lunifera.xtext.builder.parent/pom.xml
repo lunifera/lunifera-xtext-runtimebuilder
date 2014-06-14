@@ -140,29 +140,29 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
 			</plugin>
-			<!-- <plugin> -->
-			<!-- <groupId>org.jacoco</groupId> -->
-			<!-- <artifactId>jacoco-maven-plugin</artifactId> -->
-			<!-- <configuration> -->
-			<!-- <append>true</append> -->
-			<!-- </configuration> -->
-			<!-- <executions> -->
-			<!-- <execution> -->
-			<!-- <id>prepare-unit-tests</id> -->
-			<!-- <goals> -->
-			<!-- <goal>prepare-agent</goal> -->
-			<!-- </goals> -->
-			<!-- <configuration> -->
-			<!-- <output>file</output> -->
-			<!-- <destFile>${sonar.jacoco.reportPath}</destFile> -->
-			<!-- <propertyName>jacoco.agent-un.argLine</propertyName> -->
-			<!-- <includes> -->
-			<!-- <include>org.lunifera.dsl.*</include> -->
-			<!-- </includes> -->
-			<!-- </configuration> -->
-			<!-- </execution> -->
-			<!-- </executions> -->
-			<!-- </plugin> -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<configuration>
+					<append>true</append>
+				</configuration>
+				<executions>
+					<execution>
+						<id>prepare-unit-tests</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+						<configuration>
+							<output>file</output>
+							<destFile>${sonar.jacoco.reportPath}</destFile>
+							<propertyName>jacoco.agent-un.argLine</propertyName>
+							<includes>
+								<include>org.lunifera.dsl.*</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-maven-plugin</artifactId>
