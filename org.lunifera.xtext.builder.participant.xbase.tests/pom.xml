@@ -19,7 +19,7 @@
 		<relativePath>../org.lunifera.xtext.builder.parent/pom.xml</relativePath>
 	</parent>
 
-	<artifactId>org.lunifera.xtext.builder.participant.jvmtypes.tests</artifactId>
+	<artifactId>org.lunifera.xtext.builder.participant.xbase.tests</artifactId>
 	<packaging>eclipse-test-plugin</packaging>
 
 	<build>

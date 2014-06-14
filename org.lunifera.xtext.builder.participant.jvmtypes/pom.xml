@@ -20,7 +20,7 @@
 	</parent>
 
 	<artifactId>org.lunifera.xtext.builder.participant.jvmtypes</artifactId>
-	<packaging>eclipse-test-plugin</packaging>
+	<packaging>eclipse-plugin</packaging>
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>

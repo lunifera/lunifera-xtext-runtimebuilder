@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -55,6 +56,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ReferenceCardinality;
+import org.osgi.service.component.annotations.ReferencePolicy;
 import org.slf4j.Logger;
 
 import com.google.common.collect.Lists;
@@ -67,6 +69,20 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 
 	private static final Logger logger = org.slf4j.LoggerFactory
 			.getLogger(MetadataBuilder.class);
+
+	// properties for use with config admin - not yet implemented
+
+	/**
+	 * If true, then affected resources will become unloaded if an extender
+	 * bundle is stopped or a builder participant service removed
+	 */
+	private boolean unloadResources = false;
+
+	/**
+	 * If true, then affected resources will be removed from the resource set if
+	 * an extender bundle is stopped or a builder participant service removed
+	 */
+	private boolean removeFromResourceset = true;
 
 	// Is used to sync calls to the bundle space
 	private ComponentContext context;
@@ -87,6 +103,7 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 
 	private AtomicBoolean waitingForFrameworkStartedEvent = new AtomicBoolean(
 			true);
+	private AtomicBoolean resolved = new AtomicBoolean(false);
 
 	@Activate
 	public void activate(ComponentContext context) {
@@ -101,7 +118,6 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	@Deactivate
 	public void deactivate() {
 		new ServiceDeactivatedTask().run();
-		;
 	}
 
 	/**
@@ -149,6 +165,46 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	}
 
 	/**
+	 * Unloads all loaded resources in the resource set
+	 */
+	private void doUnloadAllResources() {
+		if (!unloadResources && !removeFromResourceset) {
+			return;
+		}
+		for (Resource rs : new ArrayList<Resource>(resourceSet.getResources())) {
+			if (unloadResources) {
+				rs.unload();
+			}
+
+			if (removeFromResourceset) {
+				resourceSet.getResources().remove(rs);
+			}
+		}
+	}
+
+	/**
+	 * Unloads all resources defined by the given urls.
+	 * 
+	 * @param urls
+	 */
+	private void doUnloadResources(List<URL> urls) {
+		if (!unloadResources && !removeFromResourceset) {
+			return;
+		}
+		for (URL url : urls) {
+			logger.info("Unregistered " + url.toString());
+			Resource rs = resourceSet.getResource(
+					URI.createURI(url.toString()), true);
+			if (unloadResources) {
+				rs.unload();
+			}
+			if (removeFromResourceset) {
+				resourceSet.getResources().remove(rs);
+			}
+		}
+	}
+
+	/**
 	 * Activates the given participant.
 	 * 
 	 * @param participant
@@ -175,19 +231,45 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 			return;
 		}
 
-		for (URL url : urls) {
-			logger.info("Unregistered " + url.toString());
-			Resource rs = resourceSet.getResource(
-					URI.createURI(url.toString()), true);
-			rs.unload();
-			resourceSet.getResources().remove(rs);
-		}
+		doUnloadResources(urls);
 
 		EcoreUtil.resolveAll(resourceSet);
 
 		List<Issue> validationResults = validate(resourceSet);
 		for (Issue issue : validationResults) {
-			System.out.println(issue.getMessage());
+			if (issue.getSeverity() == Severity.ERROR) {
+				logger.error(issue.toString());
+			} else {
+				logger.warn(issue.toString());
+			}
+		}
+	}
+
+	/**
+	 * Unresolves the models contained in the given bundle.
+	 * 
+	 * @param bundle
+	 */
+	private synchronized void unresolveModels(IBuilderParticipant participant) {
+		if (!resolved.get()) {
+			return;
+		}
+		List<URL> urls = doFindAllModelsToRemoveForParticipant(participant);
+		if (urls.isEmpty()) {
+			return;
+		}
+
+		doUnloadResources(urls);
+
+		EcoreUtil.resolveAll(resourceSet);
+
+		List<Issue> validationResults = validate(resourceSet);
+		for (Issue issue : validationResults) {
+			if (issue.getSeverity() == Severity.ERROR) {
+				logger.error(issue.toString());
+			} else {
+				logger.warn(issue.toString());
+			}
 		}
 	}
 
@@ -221,12 +303,71 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 		// iterate all participants
 		synchronized (participants) {
 			for (IBuilderParticipant participant : participants) {
-				result.addAll(participant.getModels(suspect));
+				result.addAll(doFindModels(suspect, participant));
 			}
 		}
 
 		if (result.size() > 0) {
 			modelProviders.add(suspect);
+		}
+
+		return result;
+	}
+
+	/**
+	 * Returns all models for the given bundle and participant.
+	 * 
+	 * @param suspect
+	 * @param participant
+	 * @return
+	 */
+	private List<URL> doFindModels(Bundle suspect,
+			IBuilderParticipant participant) {
+		return participant.getModels(suspect);
+	}
+
+	/**
+	 * Returns all models for the given participant. Therefore <b>only known
+	 * model provider bundles</b> are used.
+	 * 
+	 * @param suspect
+	 * @param participant
+	 * @return
+	 */
+	private List<URL> doFindAllModelsToRemoveForParticipant(
+			IBuilderParticipant participant) {
+
+		List<URL> result = new ArrayList<URL>();
+		synchronized (modelProviders) {
+			for (Bundle bundle : modelProviders) {
+				result.addAll(doFindModels(bundle, participant));
+			}
+		}
+
+		return result;
+	}
+
+	/**
+	 * Returns all models for the given participant. Therefore <b>ALL</b>
+	 * bundles are used.
+	 * 
+	 * @param suspect
+	 * @param participant
+	 * @return
+	 */
+	private List<URL> doFindAllModelsForNewParticipant(
+			IBuilderParticipant participant) {
+
+		List<URL> result = new ArrayList<URL>();
+		for (Bundle bundle : context.getBundleContext().getBundles()) {
+
+			List<URL> temp = doFindModels(bundle, participant);
+			if (temp.size() > 0) {
+				// adds the bundle to the bundleSpace if header is available
+				doAddToBundleSpace(bundle);
+			}
+
+			result.addAll(temp);
 		}
 
 		return result;
@@ -246,9 +387,58 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	 * 
 	 * @param participant
 	 */
-	@Reference(cardinality = ReferenceCardinality.AT_LEAST_ONE, unbind = "removeParticipant")
+	@Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC, unbind = "removeParticipant")
 	public void addParticipant(IBuilderParticipant participant) {
 		new ParticipantAddedTask(participant).run();
+	}
+
+	/**
+	 * Resolves all models for all proper model bundles.
+	 */
+	private synchronized void doScanAllBundles() {
+		for (Bundle bundle : context.getBundleContext().getBundles()) {
+			for (URL url : doFindModels(bundle)) {
+				logger.info("Adding model " + url.toString()
+						+ " to model cache.");
+				resourceSet.getResource(URI.createURI(url.toString()), true);
+
+				// adds the bundle to the bundleSpace if header is available
+				doAddToBundleSpace(bundle);
+			}
+		}
+
+		// resolve all models
+		EcoreUtil.resolveAll(resourceSet);
+
+		List<Issue> validationResults = validate(resourceSet);
+		for (Issue issue : validationResults) {
+			logger.warn(issue.toString());
+		}
+
+		logger.info("Models resolved. In case of error, see messages before.");
+	}
+
+	/**
+	 * Resolves all models for the given participant. Therefore <b>all
+	 * bundles</b> are used.
+	 * 
+	 * @param participant
+	 */
+	private synchronized void doScanAllBundles(IBuilderParticipant participant) {
+		for (URL url : doFindAllModelsForNewParticipant(participant)) {
+			logger.info("Adding model " + url.toString() + " to model cache.");
+			resourceSet.getResource(URI.createURI(url.toString()), true);
+		}
+
+		// resolve all models
+		EcoreUtil.resolveAll(resourceSet);
+
+		List<Issue> validationResults = validate(resourceSet);
+		for (Issue issue : validationResults) {
+			logger.warn(issue.toString());
+		}
+
+		logger.info("Models resolved. In case of error, see messages before.");
 	}
 
 	private void doInitializeParticipant(IBuilderParticipant participant) {
@@ -283,10 +473,17 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	}
 
 	private void doDeactivateParticipant(IBuilderParticipant participant) {
+
+		// unresolve all models for the given participant
+		unresolveModels(participant);
+
+		participants.remove(participant);
+		injectedParticipants.remove(participant);
+
+		// tell the participant to deactivate
 		participant.notifyLifecyle(new LifecycleEvent(
 				LifecycleEvent.DEACTIVATED));
 
-		injectedParticipants.remove(participant);
 	}
 
 	/**
@@ -431,34 +628,9 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 			doScanAllBundles();
 			startBundleTracking();
 
+			resolved.set(true);
+
 			handleTaskFinish(this);
-		}
-
-		/**
-		 * Resolves all models for all proper model bundles.
-		 */
-		private synchronized void doScanAllBundles() {
-			for (Bundle bundle : context.getBundleContext().getBundles()) {
-				for (URL url : doFindModels(bundle)) {
-					logger.info("Adding model " + url.toString()
-							+ " to model cache.");
-					resourceSet
-							.getResource(URI.createURI(url.toString()), true);
-
-					// adds the bundle to the bundleSpace if header is available
-					doAddToBundleSpace(bundle);
-				}
-			}
-
-			// resolve all models
-			EcoreUtil.resolveAll(resourceSet);
-
-			List<Issue> validationResults = validate(resourceSet);
-			for (Issue issue : validationResults) {
-				logger.warn(issue.toString());
-			}
-
-			logger.info("Models resolved. In case of error, see messages before.");
 		}
 
 		/**
@@ -539,7 +711,11 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 
 			List<Issue> validationResults = validate(resourceSet);
 			for (Issue issue : validationResults) {
-				logger.warn(issue.toString());
+				if (issue.getSeverity() == Severity.ERROR) {
+					logger.error(issue.toString());
+				} else {
+					logger.warn(issue.toString());
+				}
 			}
 		}
 	}
@@ -578,12 +754,12 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 
 			modelProviders.clear();
 
-			for (Resource rs : new ArrayList<Resource>(
-					resourceSet.getResources())) {
-				rs.unload();
-			}
+			doUnloadAllResources();
+
 			resourceSet = null;
 			resourceDescriptionsProvider = null;
+			resolved.set(false);
+
 		}
 	}
 
@@ -603,7 +779,13 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 				participants.add(participant);
 
 				if (isActive()) {
+					// activate the participant
 					doInitializeParticipant(participant);
+
+					// scan all bundles to find proper models
+					doScanAllBundles(participant);
+
+					// activate the participant
 					doActivateParticipant(participant);
 				}
 			}
@@ -621,7 +803,6 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 
 		@Override
 		public void run() {
-			participants.remove(participant);
 			doDeactivateParticipant(participant);
 		}
 

@@ -5,5 +5,5 @@
       <provide interface="org.osgi.framework.BundleListener"/>
       <provide interface="org.lunifera.xtext.builder.metadata.services.IMetadataBuilderService"/>
    </service>
-   <reference bind="addParticipant" cardinality="1..n" interface="org.lunifera.xtext.builder.metadata.services.IBuilderParticipant" name="Participant" policy="static" unbind="removeParticipant"/>
+   <reference bind="addParticipant" cardinality="0..n" interface="org.lunifera.xtext.builder.metadata.services.IBuilderParticipant" name="Participant" policy="dynamic" unbind="removeParticipant"/>
 </scr:component>

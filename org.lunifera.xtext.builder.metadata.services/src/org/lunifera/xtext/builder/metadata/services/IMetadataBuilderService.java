@@ -21,6 +21,9 @@ import org.osgi.framework.Bundle;
  * {@link IBuilderParticipant} have to become registered as an OSGi service.
  * Guice injection is enabled. After a participant was added to the service,
  * injections will be done.
+ * 
+ * <p>
+ * <b>Attention:</b> This interface should not be implemented by clients!
  */
 @SuppressWarnings("restriction")
 public interface IMetadataBuilderService {

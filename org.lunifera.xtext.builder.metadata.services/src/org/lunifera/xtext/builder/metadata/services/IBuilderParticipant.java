@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2011 - 2014, Lunifera GmbH (Gross Enzersdorf), Loetz KG (Heidelberg)
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors: 
+ * 		Florian Pirchner - Initial implementation
+ */
 package org.lunifera.xtext.builder.metadata.services;
 
 import java.net.URL;
@@ -11,6 +21,9 @@ import org.osgi.framework.Bundle;
  * Attention: The runtime builder needs to use the
  * {@link BundleSpaceTypeProvider}. Attached {@link BuilderParticipant} or
  * {@link StandaloneGrammarsSetup} for implementation details.
+ * 
+ * <b>Attention:</b> This interface should not be implemented by clients. Use
+ * {@link AbstractBuilderParticipant} instead.
  */
 @SuppressWarnings("restriction")
 public interface IBuilderParticipant {
