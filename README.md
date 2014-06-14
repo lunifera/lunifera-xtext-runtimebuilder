@@ -1,4 +1,4 @@
-Xtext Runtimebuilder
+Xtext Runtime Builder
 =============================
 
 A Xtext runtime builder for OSGi environments.
