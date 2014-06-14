@@ -157,7 +157,7 @@
 							<destFile>${sonar.jacoco.reportPath}</destFile>
 							<propertyName>jacoco.agent-un.argLine</propertyName>
 							<includes>
-								<include>org.lunifera.dsl.*</include>
+								<include>org.lunifera.xtext.builder.*</include>
 							</includes>
 						</configuration>
 					</execution>
