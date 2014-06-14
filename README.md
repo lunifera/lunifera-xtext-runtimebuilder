@@ -1,4 +1,4 @@
-lunifera-xtext-runtimebuilder
+Xtext Runtimebuilder
 =============================
 
 A Xtext runtime builder for OSGi environments.
@@ -144,14 +144,14 @@ For now they can not become configured by Config Admin. But if anybody has a req
 make these properties configureable.
 
 ### Build project
-To build that project just call '''mvn clean verify -Pbuild.features,build.p2,stage.p2 -Dlunifera.build.eclipse.platform.name=kepler -Dlunifera.deploy.to.local.federated.p2 -Dlunifera.build.uses.remote.federated.p2'''
+To build that project just call ```mvn clean verify -Pbuild.features,build.p2,stage.p2 -Dlunifera.build.eclipse.platform.name=kepler -Dlunifera.deploy.to.local.federated.p2 -Dlunifera.build.uses.remote.federated.p2```
 
 
 ### Get artifacts
 The artifacts are available by maven or P2 repository.
 
- P2 --> http://lun.lunifera.org/downloads/p2/lunifera/kepler/latest/
- Maven --> http://maven.lunifera.org:8086/nexus/content/repositories/snapshots/org/lunifera/xtext/builder/
+	P2 --> http://lun.lunifera.org/downloads/p2/lunifera/kepler/latest/
+	Maven --> http://maven.lunifera.org:8086/nexus/content/repositories/snapshots/org/lunifera/xtext/builder/
  
 
 
