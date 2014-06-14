@@ -23,7 +23,7 @@ import org.lunifera.xtext.builder.metadata.services.IMetadataBuilderService;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleException;
 
-public class XbaseBuilderParticipantTest {
+public class XbaseBuilderParticipantTests {
 
 	private Bundle extenderBundle;
 	private Bundle builderBundle;

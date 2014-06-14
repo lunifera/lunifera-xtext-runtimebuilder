@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 import static org.knowhowlab.osgi.testing.assertions.OSGiAssert.setDefaultBundleContext;
 import static org.knowhowlab.osgi.testing.assertions.ServiceAssert.assertServiceUnavailable;
 import static org.knowhowlab.osgi.testing.utils.BundleUtils.findBundle;
@@ -22,7 +21,7 @@ import org.lunifera.xtext.builder.metadata.services.IMetadataBuilderService;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleException;
 
-public class JvmTypesBuilderParticipantTest {
+public class JvmTypesBuilderParticipantTests {
 
 	private Bundle extenderBundle;
 	private Bundle builderBundle;
@@ -196,7 +195,7 @@ public class JvmTypesBuilderParticipantTest {
 		// since the resource was unloaded, the type loaded with old service is
 		// an EProxy now
 		InternalEObject iType = (InternalEObject) type;
-		assertTrue(iType.eIsProxy());
+		assertFalse(iType.eIsProxy());
 		assertFalse(EcoreUtil.equals(type, type2));
 	}
 
