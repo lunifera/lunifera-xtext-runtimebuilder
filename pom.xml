@@ -48,7 +48,8 @@
 				<module>org.lunifera.xtext.builder.feature.types</module>
 				<module>org.lunifera.xtext.builder.feature.runtime</module>
 				<module>org.lunifera.xtext.builder.feature.service.jvmtypes</module>
-				
+				<module>org.lunifera.xtext.builder.feature.service.xbase</module>
+			
 			</modules>
 		</profile>
 	

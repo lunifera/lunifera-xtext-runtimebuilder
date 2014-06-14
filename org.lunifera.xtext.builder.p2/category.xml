@@ -1,27 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
    <feature id="org.lunifera.xtext.builder.feature.types" version="0.0.0">
-      <category name="lunifera-xtext-typeprovider"/>
+      <category name="lunifera-xtext-builder"/>
    </feature>
    <feature id="org.lunifera.xtext.builder.feature.runtime" version="0.0.0">
       <category name="lunifera-xtext-builder"/>
    </feature>
    <feature id="org.lunifera.xtext.builder.feature.service.jvmtypes" version="0.0.0">
-      <category name="lunifera-xtext-builder-jvmtypes"/>
+      <category name="lunifera-xtext-builder"/>
    </feature>
-   <category-def name="lunifera-xtext-typeprovider" label="Builder - BundleSpaceTypeProvider">
+   <category-def name="lunifera-xtext-builder" label="Xtext Runtime Builder">
       <description>
-         Needs to become installed into the IDE and TargetPlatform
-      </description>
-   </category-def>
-   <category-def name="lunifera-xtext-builder" label="Builder - Runtime Builder (Never IDE)">
-      <description>
-         Never install into the IDE… Will cause problems with XtextIDEBuilder.
-      </description>
-   </category-def>
-   <category-def name="lunifera-xtext-builder-jvmtypes" label="Builder - Extender for Xtext JvmTypes (Never IDE)">
-      <description>
-         Provides the IJvmMetadataService which can be used to access JvmType for a given class or class name.
+         The features contained there are responsible to expose an runtime Xtext builder. Builder participants can join the build, propose model files and expose their own services. To enhance the class loading a BundleSpaceTypeProvider was implemented. Using the OSGi extender pattern, bundles can join the BundleSpace.
       </description>
    </category-def>
 </site>
