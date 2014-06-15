@@ -3,9 +3,6 @@ bin/
 **/xtend-gen
 .DS_Store
 target
-.classpath
-.settings
 xtend-gen/
 plugin.xml_gen
-.project
 /build.org.lunifera.xtext.builder.p2.kepler.latest.log.properties
