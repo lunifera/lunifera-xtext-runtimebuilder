@@ -51,7 +51,7 @@ public class JvmTypesBuilderParticipantTests {
 	}
 
 	@Test
-	public void test_cacheReset() {
+	public void testCacheReset() {
 
 		IJvmTypeMetadataService service = getService(Activator.context,
 				IJvmTypeMetadataService.class, TIME_1000);
@@ -73,7 +73,7 @@ public class JvmTypesBuilderParticipantTests {
 	}
 
 	@Test
-	public void test_getJvmType_WithManuallyAddedBundleSpace() {
+	public void testGetJvmTypeWithManuallyAddedBundleSpace() {
 
 		IJvmTypeMetadataService service = getService(Activator.context,
 				IJvmTypeMetadataService.class, TIME_1000);
@@ -91,7 +91,7 @@ public class JvmTypesBuilderParticipantTests {
 	}
 
 	@Test
-	public void test_LoadClass_ThenRemoveParticipant() {
+	public void testLoadClassThenRemoveParticipant() {
 		IJvmTypeMetadataService service = getService(Activator.context,
 				IJvmTypeMetadataService.class, TIME_1000);
 		IMetadataBuilderService builderService = getService(Activator.context,
@@ -123,7 +123,7 @@ public class JvmTypesBuilderParticipantTests {
 	}
 
 	@Test
-	public void test_bundleSpace_extenderBundle() throws BundleException,
+	public void testBundleSpaceExtenderBundle() throws BundleException,
 			InterruptedException {
 		IJvmTypeMetadataService service = getService(Activator.context,
 				IJvmTypeMetadataService.class, TIME_1000);
@@ -162,7 +162,7 @@ public class JvmTypesBuilderParticipantTests {
 	}
 
 	@Test
-	public void test_deactivateService() throws Exception {
+	public void testDeactivateService() throws Exception {
 		IJvmTypeMetadataService service = getService(Activator.context,
 				IJvmTypeMetadataService.class, TIME_1000);
 		IMetadataBuilderService builderService = getService(Activator.context,
@@ -202,7 +202,7 @@ public class JvmTypesBuilderParticipantTests {
 	}
 
 	@Test
-	public void test_cache() throws Exception {
+	public void testCache() throws Exception {
 		IJvmTypeMetadataService service = getService(Activator.context,
 				IJvmTypeMetadataService.class, TIME_1000);
 		IMetadataBuilderService builderService = getService(Activator.context,
