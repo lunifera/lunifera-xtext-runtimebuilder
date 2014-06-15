@@ -33,7 +33,7 @@ public interface IMetadataBuilderService {
 	 * BundleSpace of the builder. So class loading issues are forwareded to
 	 * this bundle.
 	 */
-	public static final String LUN_RUNTIME_BUILDER_BUNDLE_SPACE = "Lun-RuntimeBuilder-BundleSpace";
+	static final String LUN_RUNTIME_BUILDER_BUNDLE_SPACE = "Lun-RuntimeBuilder-BundleSpace";
 
 	/**
 	 * Returns the resolved model or <code>null</code> if the model could not be

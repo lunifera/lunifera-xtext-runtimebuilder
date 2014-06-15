@@ -60,8 +60,9 @@ public class BundleSpace {
 		synchronized (cache) {
 			result = cache.get(name);
 			if (result != null) {
-				if (result == nullValue)
+				if (result == nullValue) {
 					throw CACHED_EXCEPTION;
+				}
 				return result;
 			}
 
@@ -103,8 +104,10 @@ public class BundleSpace {
 
 	@SuppressWarnings("serial")
 	private class Cache extends HashMap<String, Class<?>> {
+		private static final int INITIAL_SIZE = 500;
+
 		public Cache() {
-			super(500);
+			super(INITIAL_SIZE);
 			for (Class<?> primitiveType : Primitives.ALL_PRIMITIVE_TYPES) {
 				put(primitiveType.getName(), primitiveType);
 			}

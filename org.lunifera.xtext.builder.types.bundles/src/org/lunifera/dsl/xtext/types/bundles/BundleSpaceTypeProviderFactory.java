@@ -27,8 +27,9 @@ public class BundleSpaceTypeProviderFactory extends AbstractTypeProviderFactory 
 	}
 
 	public BundleSpaceTypeProvider createTypeProvider(ResourceSet resourceSet) {
-		if (resourceSet == null)
+		if (resourceSet == null) {
 			throw new IllegalArgumentException("resourceSet may not be null.");
+		}
 		BundleSpaceTypeProvider result = createClasspathTypeProvider(resourceSet);
 		return result;
 	}

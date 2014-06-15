@@ -40,16 +40,8 @@ public class BundleSpaceTypeProvider extends AbstractRuntimeJvmTypeProvider {
 			ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess) {
 		super(resourceSet, indexedJvmTypeAccess);
 		this.classFinder = classFinder;
-		uriHelper = createClassURIHelper();
-		reflectionTypeFactory = createDeclaredTypeFactory();
-	}
-
-	protected ReflectionTypeFactory createDeclaredTypeFactory() {
-		return new ReflectionTypeFactory(uriHelper);
-	}
-
-	protected ReflectURIHelper createClassURIHelper() {
-		return new ReflectURIHelper();
+		uriHelper = new ReflectURIHelper();
+		reflectionTypeFactory = new ReflectionTypeFactory(uriHelper);
 	}
 
 	public ReflectURIHelper getClassURIHelper() {
@@ -124,8 +116,9 @@ public class BundleSpaceTypeProvider extends AbstractRuntimeJvmTypeProvider {
 					.getFragment(clazz));
 			EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(
 					proxyURI, getResourceSet());
-			if (candidate instanceof JvmType)
+			if (candidate instanceof JvmType) {
 				return (JvmType) candidate;
+			}
 		}
 		TypeResource result = (TypeResource) getResourceSet().getResource(
 				resourceURI, true);

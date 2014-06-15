@@ -67,7 +67,7 @@ import com.google.inject.Injector;
 @Component(immediate = true)
 public class MetadataBuilder implements BundleListener, IMetadataBuilderService {
 
-	private static final Logger logger = org.slf4j.LoggerFactory
+	private static final Logger LOGGER = org.slf4j.LoggerFactory
 			.getLogger(MetadataBuilder.class);
 
 	// properties for use with config admin - not yet implemented
@@ -115,6 +115,9 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 		return context != null;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Deactivate
 	public void deactivate() {
 		new ServiceDeactivatedTask().run();
@@ -128,10 +131,17 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	 * @param type
 	 * @return
 	 */
-	public synchronized EObject getMetadata(String qualifiedName, EClass type) {
+	public EObject getMetadata(String qualifiedName, EClass type) {
 		return getEObjectForFQN(converter.toQualifiedName(qualifiedName), type);
 	}
 
+	/**
+	 * Returns the eObject for the given fully qualified name and type.
+	 * 
+	 * @param fqn
+	 * @param type
+	 * @return
+	 */
 	public EObject getEObjectForFQN(QualifiedName fqn, EClass type) {
 		EObject result = null;
 		IResourceDescriptions resourceDescriptions = resourceDescriptionsProvider
@@ -192,7 +202,7 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 			return;
 		}
 		for (URL url : urls) {
-			logger.info("Unregistered " + url.toString());
+			LOGGER.info("Unregistered " + url.toString());
 			Resource rs = resourceSet.getResource(
 					URI.createURI(url.toString()), true);
 			if (unloadResources) {
@@ -225,7 +235,7 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	 * 
 	 * @param bundle
 	 */
-	private synchronized void unresolveModels(Bundle bundle) {
+	private void unresolveModels(Bundle bundle) {
 		List<URL> urls = doFindModels(bundle);
 		if (urls.isEmpty()) {
 			return;
@@ -238,9 +248,9 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 		List<Issue> validationResults = validate(resourceSet);
 		for (Issue issue : validationResults) {
 			if (issue.getSeverity() == Severity.ERROR) {
-				logger.error(issue.toString());
+				LOGGER.error(issue.toString());
 			} else {
-				logger.warn(issue.toString());
+				LOGGER.warn(issue.toString());
 			}
 		}
 	}
@@ -250,7 +260,7 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	 * 
 	 * @param bundle
 	 */
-	private synchronized void unresolveModels(IBuilderParticipant participant) {
+	private void unresolveModels(IBuilderParticipant participant) {
 		if (!resolved.get()) {
 			return;
 		}
@@ -266,9 +276,9 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 		List<Issue> validationResults = validate(resourceSet);
 		for (Issue issue : validationResults) {
 			if (issue.getSeverity() == Severity.ERROR) {
-				logger.error(issue.toString());
+				LOGGER.error(issue.toString());
 			} else {
-				logger.warn(issue.toString());
+				LOGGER.warn(issue.toString());
 			}
 		}
 	}
@@ -395,10 +405,10 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	/**
 	 * Resolves all models for all proper model bundles.
 	 */
-	private synchronized void doScanAllBundles() {
+	private void doScanAllBundles() {
 		for (Bundle bundle : context.getBundleContext().getBundles()) {
 			for (URL url : doFindModels(bundle)) {
-				logger.info("Adding model " + url.toString()
+				LOGGER.info("Adding model " + url.toString()
 						+ " to model cache.");
 				resourceSet.getResource(URI.createURI(url.toString()), true);
 
@@ -412,10 +422,10 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 
 		List<Issue> validationResults = validate(resourceSet);
 		for (Issue issue : validationResults) {
-			logger.warn(issue.toString());
+			LOGGER.warn(issue.toString());
 		}
 
-		logger.info("Models resolved. In case of error, see messages before.");
+		LOGGER.info("Models resolved. In case of error, see messages before.");
 	}
 
 	/**
@@ -424,9 +434,9 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	 * 
 	 * @param participant
 	 */
-	private synchronized void doScanAllBundles(IBuilderParticipant participant) {
+	private void doScanAllBundles(IBuilderParticipant participant) {
 		for (URL url : doFindAllModelsForNewParticipant(participant)) {
-			logger.info("Adding model " + url.toString() + " to model cache.");
+			LOGGER.info("Adding model " + url.toString() + " to model cache.");
 			resourceSet.getResource(URI.createURI(url.toString()), true);
 		}
 
@@ -435,10 +445,10 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 
 		List<Issue> validationResults = validate(resourceSet);
 		for (Issue issue : validationResults) {
-			logger.warn(issue.toString());
+			LOGGER.warn(issue.toString());
 		}
 
-		logger.info("Models resolved. In case of error, see messages before.");
+		LOGGER.info("Models resolved. In case of error, see messages before.");
 	}
 
 	private void doInitializeParticipant(IBuilderParticipant participant) {
@@ -521,7 +531,7 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	/**
 	 * An internal task that processes different kinds of issues.
 	 */
-	static interface ITask {
+	interface ITask {
 		void run();
 	}
 
@@ -581,9 +591,9 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 		 * Does the setup.
 		 */
 		protected void doSetupService() {
-			converter = new IQualifiedNameConverter.DefaultImpl();
 			injector = Guice.createInjector(new MetadataBuilderModule(
 					MetadataBuilder.this));
+			converter = injector.getInstance(IQualifiedNameConverter.class);
 			resourceSet = injector.getInstance(XtextResourceSet.class);
 			resourceDescriptionsProvider = injector
 					.getInstance(ResourceDescriptionsProvider.class);
@@ -593,7 +603,6 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 
 			// Create the bundle space for class loading issues
 			new BundleSpaceTypeProvider(bundleSpace, resourceSet, jvmTypeAccess);
-			// new ClasspathTypeProvider(classLoader, resourceSet, null);
 			resourceSet.setClasspathURIContext(bundleSpace);
 		}
 
@@ -703,7 +712,7 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 				return;
 			}
 			for (URL url : urls) {
-				logger.info("Added " + url.toString() + " to metadata cache.");
+				LOGGER.info("Added " + url.toString() + " to metadata cache.");
 				resourceSet.getResource(URI.createURI(url.toString()), true);
 			}
 
@@ -712,9 +721,9 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 			List<Issue> validationResults = validate(resourceSet);
 			for (Issue issue : validationResults) {
 				if (issue.getSeverity() == Severity.ERROR) {
-					logger.error(issue.toString());
+					LOGGER.error(issue.toString());
 				} else {
-					logger.warn(issue.toString());
+					LOGGER.warn(issue.toString());
 				}
 			}
 		}

@@ -23,6 +23,15 @@ import org.osgi.framework.BundleException;
 
 public class JvmTypesBuilderParticipantTests {
 
+	private static final String STRING_CLASS = "java.lang.String";
+	private static final String EXTENDER_CLASS2 = "org.lunifera.dsl.xtext.builder.participant.jvmtypes.extender.tests.ExtenderClass2ToLoad";
+	private static final String EXTENDER_CLASS = "org.lunifera.dsl.xtext.builder.participant.jvmtypes.extender.tests.ExtenderClassToLoad";
+	private static final String BUNDLE_METADATA_SERVICE = "org.lunifera.xtext.builder.metadata.services";
+	private static final String BUNDLE_EXTENDER = "org.lunifera.xtext.builder.participant.jvmtypes.extender.tests";
+	private static final int TIME_500 = 500;
+	private static final int TIME_1000 = 1000;
+	private static final int TIME_2000 = 2000;
+
 	private Bundle extenderBundle;
 	private Bundle builderBundle;
 
@@ -31,30 +40,28 @@ public class JvmTypesBuilderParticipantTests {
 
 		setDefaultBundleContext(Activator.context);
 
-		extenderBundle = findBundle(Activator.context,
-				"org.lunifera.xtext.builder.participant.jvmtypes.extender.tests");
+		extenderBundle = findBundle(Activator.context, BUNDLE_EXTENDER);
 		extenderBundle.stop();
 
 		// restart the metadata service
-		builderBundle = findBundle(Activator.context,
-				"org.lunifera.xtext.builder.metadata.services");
+		builderBundle = findBundle(Activator.context, BUNDLE_METADATA_SERVICE);
 		builderBundle.stop();
 		builderBundle.start();
-		getService(Activator.context, IMetadataBuilderService.class, 2000);
+		getService(Activator.context, IMetadataBuilderService.class, TIME_2000);
 	}
 
 	@Test
-	public void test_cacheReset() {
+	public void testCacheReset() {
 
 		IJvmTypeMetadataService service = getService(Activator.context,
-				IJvmTypeMetadataService.class, 1000);
+				IJvmTypeMetadataService.class, TIME_1000);
 		IMetadataBuilderService builderService = getService(Activator.context,
-				IMetadataBuilderService.class, 1000);
+				IMetadataBuilderService.class, TIME_1000);
 		assertNotNull(service);
 		assertNotNull(builderService);
 
 		JvmType type = service.getJvmType(String.class);
-		assertEquals("java.lang.String", type.getQualifiedName());
+		assertEquals(STRING_CLASS, type.getQualifiedName());
 
 		JvmType testClass = service.getJvmType(getClass());
 		assertNull(testClass);
@@ -66,12 +73,12 @@ public class JvmTypesBuilderParticipantTests {
 	}
 
 	@Test
-	public void test_getJvmType_WithManuallyAddedBundleSpace() {
+	public void testGetJvmTypeWithManuallyAddedBundleSpace() {
 
 		IJvmTypeMetadataService service = getService(Activator.context,
-				IJvmTypeMetadataService.class, 1000);
+				IJvmTypeMetadataService.class, TIME_1000);
 		IMetadataBuilderService builderService = getService(Activator.context,
-				IMetadataBuilderService.class, 1000);
+				IMetadataBuilderService.class, TIME_1000);
 		assertNotNull(service);
 		assertNotNull(builderService);
 
@@ -84,11 +91,11 @@ public class JvmTypesBuilderParticipantTests {
 	}
 
 	@Test
-	public void test_LoadClass_ThenRemoveParticipant() {
+	public void testLoadClassThenRemoveParticipant() {
 		IJvmTypeMetadataService service = getService(Activator.context,
-				IJvmTypeMetadataService.class, 1000);
+				IJvmTypeMetadataService.class, TIME_1000);
 		IMetadataBuilderService builderService = getService(Activator.context,
-				IMetadataBuilderService.class, 1000);
+				IMetadataBuilderService.class, TIME_1000);
 		assertNotNull(builderService);
 		assertNotNull(service);
 
@@ -116,79 +123,74 @@ public class JvmTypesBuilderParticipantTests {
 	}
 
 	@Test
-	public void test_bundleSpace_extenderBundle() throws BundleException,
+	public void testBundleSpaceExtenderBundle() throws BundleException,
 			InterruptedException {
 		IJvmTypeMetadataService service = getService(Activator.context,
-				IJvmTypeMetadataService.class, 1000);
+				IJvmTypeMetadataService.class, TIME_1000);
 		IMetadataBuilderService builderService = getService(Activator.context,
-				IMetadataBuilderService.class, 1000);
+				IMetadataBuilderService.class, TIME_1000);
 		assertNotNull(builderService);
 		assertNotNull(service);
 
 		// then load class
-		JvmType testClass = service
-				.getJvmType("org.lunifera.dsl.xtext.builder.participant.jvmtypes.extender.tests.ExtenderClassToLoad");
+		JvmType testClass = service.getJvmType(EXTENDER_CLASS);
 		assertNull(testClass);
-		JvmType testClass2 = service
-				.getJvmType("org.lunifera.dsl.xtext.builder.participant.jvmtypes.extender.tests.ExtenderClass2ToLoad");
+		JvmType testClass2 = service.getJvmType(EXTENDER_CLASS2);
 		assertNull(testClass2);
 
 		// now start the extender bundle
 		assertEquals(Bundle.RESOLVED, extenderBundle.getState());
 		extenderBundle.start();
-		// wait 500 ms since bundle start is async
-		Thread.sleep(500);
+		// wait TIME_500 ms since bundle start is async
+		Thread.sleep(TIME_500);
 
-		testClass = service
-				.getJvmType("org.lunifera.dsl.xtext.builder.participant.jvmtypes.extender.tests.ExtenderClassToLoad");
+		testClass = service.getJvmType(EXTENDER_CLASS);
 		assertNotNull(testClass);
 
 		// now stop the extender bundle again
 		extenderBundle.stop();
-		// wait 500 ms since bundle stop is async
-		Thread.sleep(500);
+		// wait TIME_500 ms since bundle stop is async
+		Thread.sleep(TIME_500);
 
 		// test class1 is still available, since cached
-		testClass = service
-				.getJvmType("org.lunifera.dsl.xtext.builder.participant.jvmtypes.extender.tests.ExtenderClassToLoad");
+		testClass = service.getJvmType(EXTENDER_CLASS);
 		assertNotNull(testClass);
 
 		// test class2 can not be loaded, since not available in bundle space
-		testClass2 = service
-				.getJvmType("org.lunifera.dsl.xtext.builder.participant.jvmtypes.extender.tests.ExtenderClass2ToLoad");
+		testClass2 = service.getJvmType(EXTENDER_CLASS2);
 		assertNull(testClass2);
 	}
 
 	@Test
-	public void test_deactivateService() throws Exception {
+	public void testDeactivateService() throws Exception {
 		IJvmTypeMetadataService service = getService(Activator.context,
-				IJvmTypeMetadataService.class, 1000);
+				IJvmTypeMetadataService.class, TIME_1000);
 		IMetadataBuilderService builderService = getService(Activator.context,
-				IMetadataBuilderService.class, 1000);
+				IMetadataBuilderService.class, TIME_1000);
 		assertNotNull(service);
 		assertNotNull(builderService);
 
 		JvmType type = service.getJvmType(String.class);
-		assertEquals("java.lang.String", type.getQualifiedName());
+		assertEquals(STRING_CLASS, type.getQualifiedName());
 
 		builderBundle.stop();
-		Thread.sleep(500);
+		Thread.sleep(TIME_500);
 
 		assertServiceUnavailable(IJvmTypeMetadataService.class);
 		assertServiceUnavailable(IMetadataBuilderService.class);
 
 		builderBundle.start();
-		Thread.sleep(500);
+		Thread.sleep(TIME_500);
 
 		service = getService(Activator.context, IJvmTypeMetadataService.class,
-				1000);
+				TIME_1000);
 		builderService = getService(Activator.context,
-				IMetadataBuilderService.class, 1000);
+				IMetadataBuilderService.class, TIME_1000);
 		assertNotNull(service);
 		assertNotNull(builderService);
 
 		JvmType type2 = service.getJvmType(String.class);
-		assertEquals("java.lang.String", type.getQualifiedName());
+		assertEquals(STRING_CLASS, type.getQualifiedName());
 
 		assertNotSame(type, type2);
 
@@ -200,19 +202,19 @@ public class JvmTypesBuilderParticipantTests {
 	}
 
 	@Test
-	public void test_cache() throws Exception {
+	public void testCache() throws Exception {
 		IJvmTypeMetadataService service = getService(Activator.context,
-				IJvmTypeMetadataService.class, 1000);
+				IJvmTypeMetadataService.class, TIME_1000);
 		IMetadataBuilderService builderService = getService(Activator.context,
-				IMetadataBuilderService.class, 1000);
+				IMetadataBuilderService.class, TIME_1000);
 		assertNotNull(service);
 		assertNotNull(builderService);
 
 		JvmType type = service.getJvmType(String.class);
-		assertEquals("java.lang.String", type.getQualifiedName());
+		assertEquals(STRING_CLASS, type.getQualifiedName());
 
 		JvmType type2 = service.getJvmType(String.class);
-		assertEquals("java.lang.String", type.getQualifiedName());
+		assertEquals(STRING_CLASS, type.getQualifiedName());
 
 		InternalEObject iType = (InternalEObject) type;
 		assertFalse(iType.eIsProxy());
