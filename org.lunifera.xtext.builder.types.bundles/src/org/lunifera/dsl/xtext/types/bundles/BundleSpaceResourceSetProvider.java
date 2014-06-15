@@ -19,8 +19,9 @@ public class BundleSpaceResourceSetProvider {
 		if (resourceSet instanceof XtextResourceSet) {
 			XtextResourceSet xtextResourceSet = (XtextResourceSet) resourceSet;
 			Object context = xtextResourceSet.getClasspathURIContext();
-			if (context instanceof BundleSpace)
+			if (context instanceof BundleSpace) {
 				return (BundleSpace) context;
+			}
 		}
 		return null;
 	}

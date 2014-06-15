@@ -52,7 +52,7 @@ public interface IBuilderParticipant {
 	/**
 	 * The lifecycle event for the participant.
 	 */
-	public static class LifecycleEvent {
+	class LifecycleEvent {
 		public static final int INITIALIZE = 10;
 		public static final int ACTIVATED = 20;
 		public static final int DEACTIVATED = 30;
