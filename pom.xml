@@ -22,6 +22,15 @@
 	<artifactId>org.lunifera.xtext.builder.aggregator</artifactId>
 	<packaging>pom</packaging>
 
+	<url>${distribution.site.url}</url>
+	<distributionManagement>
+		<site>
+			<id>gh-pages</id>
+			<name>Lunifera GitHub Pages</name>
+			<url>${distribution.site.url}</url>
+		</site>
+	</distributionManagement>
+
 	<modules>
 		<module>org.lunifera.xtext.builder.parent</module>
 		<!-- P2 bundles -->
@@ -29,17 +38,10 @@
 		<module>org.lunifera.xtext.builder.types.bundles</module>
 		<module>org.lunifera.xtext.builder.participant.jvmtypes</module>
 		<module>org.lunifera.xtext.builder.participant.xbase</module>
-
 		<module>org.lunifera.xtext.builder.participant.jvmtypes.tests</module>
 		<module>org.lunifera.xtext.builder.participant.jvmtypes.extender.tests</module>
 		<module>org.lunifera.xtext.builder.participant.xbase.tests</module>
 		<module>org.lunifera.xtext.builder.participant.xbase.extender.tests</module>
-
-		<!-- P2 feature -->
-		<module>org.lunifera.xtext.builder.feature.types</module>
-		<module>org.lunifera.xtext.builder.feature.runtime</module>
-		<module>org.lunifera.xtext.builder.feature.service.jvmtypes</module>
-		<module>org.lunifera.xtext.builder.feature.service.xbase</module>
 	</modules>
 
 	<profiles>
@@ -48,28 +50,11 @@
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
-			<build>
-				<defaultGoal>clean verify</defaultGoal>
-			</build>
 			<modules>
-				<module>org.lunifera.xtext.builder.parent</module>
-				<!-- P2 bundles -->
-				<module>org.lunifera.xtext.builder.metadata.services</module>
-				<module>org.lunifera.xtext.builder.types.bundles</module>
-				<module>org.lunifera.xtext.builder.participant.jvmtypes</module>
-				<module>org.lunifera.xtext.builder.participant.xbase</module>
-
-				<module>org.lunifera.xtext.builder.participant.jvmtypes.tests</module>
-				<module>org.lunifera.xtext.builder.participant.jvmtypes.extender.tests</module>
-				<module>org.lunifera.xtext.builder.participant.xbase.tests</module>
-				<module>org.lunifera.xtext.builder.participant.xbase.extender.tests</module>
-
-				<!-- P2 feature -->
 				<module>org.lunifera.xtext.builder.feature.types</module>
 				<module>org.lunifera.xtext.builder.feature.runtime</module>
 				<module>org.lunifera.xtext.builder.feature.service.jvmtypes</module>
 				<module>org.lunifera.xtext.builder.feature.service.xbase</module>
-
 			</modules>
 		</profile>
 
