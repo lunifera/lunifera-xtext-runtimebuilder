@@ -23,7 +23,7 @@ import org.osgi.service.component.annotations.Deactivate;
 
 import com.google.inject.Inject;
 
-@Component
+@Component(service = { IBuilderParticipant.class })
 public class JvmTypesBuilderParticipant extends AbstractBuilderParticipant {
 
 	@Inject

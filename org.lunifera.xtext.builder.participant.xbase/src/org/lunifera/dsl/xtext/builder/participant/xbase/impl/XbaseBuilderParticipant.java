@@ -37,7 +37,7 @@ import org.osgi.service.component.annotations.Deactivate;
 import com.google.inject.Inject;
 
 @SuppressWarnings("restriction")
-@Component
+@Component(service = { IBuilderParticipant.class })
 public class XbaseBuilderParticipant extends AbstractBuilderParticipant {
 
 	@Inject
@@ -111,7 +111,6 @@ public class XbaseBuilderParticipant extends AbstractBuilderParticipant {
 		}
 	}
 
-	@SuppressWarnings("restriction")
 	private void initialize() {
 		XtextStandaloneSetup.doSetup();
 		XbaseWithAnnotationsBundleSpaceStandaloneSetup.doSetup();
