@@ -42,6 +42,10 @@
 		<module>org.lunifera.xtext.builder.participant.jvmtypes.extender.tests</module>
 		<module>org.lunifera.xtext.builder.participant.xbase.tests</module>
 		<module>org.lunifera.xtext.builder.participant.xbase.extender.tests</module>
+		
+		<!--  Example for test -->
+		<module>org.lunifera.xtext.builder.participant.dmodelsample</module>
+		<module>org.lunifera.xtext.builder.participant.dmodelsample.tests</module>
 	</modules>
 
 	<profiles>

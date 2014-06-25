@@ -236,6 +236,9 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	 * @param bundle
 	 */
 	private void unresolveModels(Bundle bundle) {
+		if (resourceSet == null) {
+			return;
+		}
 		List<URL> urls = doFindModels(bundle);
 		if (urls.isEmpty()) {
 			return;
@@ -284,6 +287,9 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	}
 
 	protected List<Issue> validate(ResourceSet resourceSet) {
+		if (resourceSet.getResources() == null) {
+			return Collections.emptyList();
+		}
 		List<Issue> issues = Lists.newArrayList();
 		List<Resource> resources = Lists.newArrayList(resourceSet
 				.getResources());
@@ -320,6 +326,16 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 		if (result.size() > 0) {
 			modelProviders.add(suspect);
 		}
+
+		// Set<String> fragments = new HashSet<String>();
+		// for (Iterator<URL> iterator = result.iterator(); iterator.hasNext();)
+		// {
+		// URL url = iterator.next();
+		// URI uri = URI.createURI(url.toString());
+		// if (fragments.contains(uri.fragment())) {
+		// iterator.remove();
+		// }
+		// }
 
 		return result;
 	}
@@ -422,7 +438,11 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 
 		List<Issue> validationResults = validate(resourceSet);
 		for (Issue issue : validationResults) {
-			LOGGER.warn(issue.toString());
+			if (issue.getSeverity() == Severity.ERROR) {
+				LOGGER.error(issue.toString());
+			} else {
+				LOGGER.warn(issue.toString());
+			}
 		}
 
 		LOGGER.info("Models resolved. In case of error, see messages before.");

@@ -1,0 +1,14 @@
+// import java.util.List
+// import java.awt.Point
+// import org.lunifera.xtext.builder.tests.LocalClass
+
+package org.my.tests {
+
+	entity Simple {
+	// 	list : List < String >
+	// 	dbl : Double
+	// 	point : Point
+	// 	localClass : LocalClass
+	}
+
+}

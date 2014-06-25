@@ -2,8 +2,12 @@ package org.lunifera.dsl.xtext.builder.participant.xbase.impl;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
@@ -59,6 +63,16 @@ public class XbaseBuilderParticipant implements IBuilderParticipant {
 				BundleWiring.LISTRESOURCES_RECURSE));
 		results.addAll(wiring.findEntries("/", "*.___xbasewithannotations",
 				BundleWiring.LISTRESOURCES_RECURSE));
+
+		Set<String> fragments = new HashSet<String>();
+		for (Iterator<URL> iterator = results.iterator(); iterator.hasNext();) {
+			URL url = iterator.next();
+			URI uri = URI.createURI(url.toString());
+			if (fragments.contains(uri.lastSegment())) {
+				iterator.remove();
+			}
+			fragments.add(uri.lastSegment());
+		}
 
 		return results;
 	}
