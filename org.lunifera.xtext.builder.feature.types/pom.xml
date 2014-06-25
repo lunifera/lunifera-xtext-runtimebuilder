@@ -22,6 +22,13 @@
 
 	<artifactId>org.lunifera.xtext.builder.feature.types</artifactId>
 	<packaging>eclipse-feature</packaging>
+	<name>BundleSpaceTypeProvider and Xbase Setup feature</name>
+	<description>This features contains an implementation for an BundleSpaceTypeProvider.
+
+It is similar to the ClasspathTypeProvider, but all requests to load a class are forwarded to the BundleSpaceTypeProvider who will delegate the request to all registered bundles. Bundles may become registered by the IMetadataService API or by OSGi extender pattern. Every class that exposes the MANIFEST-header Lun-RuntimeBuilder-BundleSpace will be added to the BundleSpace automatically.
+
+It additionally comes with XbaseRuntimeBuilderSetup implementations. The will respect the use of the BundleSpaceTypeProvider.</description>
+
 	<build>
 		<plugins>
 			<plugin>

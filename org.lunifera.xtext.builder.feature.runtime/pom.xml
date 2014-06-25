@@ -22,6 +22,15 @@
 
 	<artifactId>org.lunifera.xtext.builder.feature.runtime</artifactId>
 	<packaging>eclipse-feature</packaging>
+	<name>OSGi Runtime Xtext Builder</name>
+	<description>This features feature contains a &quot;OSGi Runtime Xtext Builder&quot;. 
+
+It allows builder participants to join the build. Participants are responsible to initialize supported Xtext grammars by invoking the standalone setup,
+by providing model files and by exposing their own service for model access. 
+
+There is also a way to extend class loading. The OSGi runtime builder uses a BundleSpaceTypeProvider and delegates every class loading request to the registered bundles. BundleSpace-Bundles can become registered by the IMetadataService or by adding a bunde manifest header called: &quot;Lun-RuntimeBuilder-BundleSpace&quot;. If a bundle contains that manifest header it will be automatically added to the BundleSpace.
+Bundles that provide models for the builder will be added to the BundleSpace automatically too.</description>
+	
 	<build>
 		<plugins>
 			<plugin>

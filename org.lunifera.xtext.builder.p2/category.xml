@@ -9,6 +9,9 @@
    <feature id="org.lunifera.xtext.builder.feature.service.jvmtypes" version="0.0.0">
       <category name="lunifera-xtext-builder"/>
    </feature>
+   <feature id="org.lunifera.xtext.builder.feature.service.xbase" version="0.0.0">
+      <category name="lunifera-xtext-builder"/>
+   </feature>
    <category-def name="lunifera-xtext-builder" label="Xtext Runtime Builder">
       <description>
          The features contained there are responsible to expose an runtime Xtext builder. Builder participants can join the build, propose model files and expose their own services. To enhance the class loading a BundleSpaceTypeProvider was implemented. Using the OSGi extender pattern, bundles can join the BundleSpace.

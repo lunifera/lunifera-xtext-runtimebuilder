@@ -22,6 +22,11 @@
 
 	<artifactId>org.lunifera.xtext.builder.feature.service.jvmtypes</artifactId>
 	<packaging>eclipse-feature</packaging>
+	<name>JvmTypes Builder Participant</name>
+	<description>This feature contains a builder participant. It will setup the Xtext types model and exposes a service IJvmTypeMetadataService. 
+
+Using the method  &quot;JvmType getJvmType(String qualifiedName)&quot; the JvmType for the given name will be returned. All bundles in the BundleSpace will be scanned for a matching class.</description>
+	
 	<build>
 		<plugins>
 			<plugin>

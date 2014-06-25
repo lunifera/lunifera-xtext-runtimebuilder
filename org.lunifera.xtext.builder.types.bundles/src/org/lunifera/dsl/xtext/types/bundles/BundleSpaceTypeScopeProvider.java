@@ -36,6 +36,9 @@ public class BundleSpaceTypeScopeProvider extends AbstractTypeScopeProvider {
 
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public BundleSpaceTypeScope createTypeScope(IJvmTypeProvider typeProvider,
 			Predicate<IEObjectDescription> filter) {
@@ -43,6 +46,9 @@ public class BundleSpaceTypeScopeProvider extends AbstractTypeScopeProvider {
 				qualifiedNameConverter, filter);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public AbstractConstructorScope createConstructorScope(
 			IJvmTypeProvider typeProvider, Predicate<IEObjectDescription> filter) {
@@ -50,11 +56,19 @@ public class BundleSpaceTypeScopeProvider extends AbstractTypeScopeProvider {
 		return new BundleSpaceConstructorScope(typeScope);
 	}
 
+	/**
+	 * Sets the type provider factory.
+	 * 
+	 * @param typeProviderFactory
+	 */
 	public void setTypeProviderFactory(
 			BundleSpaceTypeProviderFactory typeProviderFactory) {
 		this.typeProviderFactory = typeProviderFactory;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public BundleSpaceTypeProviderFactory getTypeProviderFactory() {
 		return typeProviderFactory;

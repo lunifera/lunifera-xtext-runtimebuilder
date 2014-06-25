@@ -24,10 +24,11 @@
 
    <requires>
       <import feature="org.eclipse.xtext.sdk" version="2.5.4" match="greaterOrEqual"/>
+      <import feature="org.lunifera.xtext.builder.feature.runtime" version="0.0.0"/>
    </requires>
 
    <plugin
-         id="org.lunifera.xtext.builder.types.bundles"
+         id="org.lunifera.xtext.builder.participant.jvmtypes"
          download-size="0"
          install-size="0"
          version="0.0.0"

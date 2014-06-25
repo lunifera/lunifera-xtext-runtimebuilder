@@ -15,6 +15,12 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 
 public class BundleSpaceResourceSetProvider {
 
+	/**
+	 * Uses the given resourceSet to find the bundle space registered with it.
+	 * 
+	 * @param resourceSet
+	 * @return
+	 */
 	public BundleSpace getBundleSpace(ResourceSet resourceSet) {
 		if (resourceSet instanceof XtextResourceSet) {
 			XtextResourceSet xtextResourceSet = (XtextResourceSet) resourceSet;

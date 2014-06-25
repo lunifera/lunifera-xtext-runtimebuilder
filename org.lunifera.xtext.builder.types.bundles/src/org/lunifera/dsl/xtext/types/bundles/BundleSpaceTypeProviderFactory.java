@@ -26,26 +26,41 @@ public class BundleSpaceTypeProviderFactory extends AbstractTypeProviderFactory 
 	public BundleSpaceTypeProviderFactory() {
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public BundleSpaceTypeProvider createTypeProvider(ResourceSet resourceSet) {
 		if (resourceSet == null) {
 			throw new IllegalArgumentException("resourceSet may not be null.");
 		}
-		BundleSpaceTypeProvider result = createClasspathTypeProvider(resourceSet);
+		BundleSpaceTypeProvider result = createBundleSpaceTypeProvider(resourceSet);
 		return result;
 	}
 
-	protected BundleSpaceTypeProvider createClasspathTypeProvider(
+	/**
+	 * Creates the bundle space type provider.
+	 * 
+	 * @param resourceSet
+	 * @return
+	 */
+	protected BundleSpaceTypeProvider createBundleSpaceTypeProvider(
 			ResourceSet resourceSet) {
 		return new BundleSpaceTypeProvider(
 				bundleSpaceProvider.getBundleSpace(resourceSet), resourceSet,
 				getIndexedJvmTypeAccess());
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public BundleSpaceTypeProvider createTypeProvider() {
 		return (BundleSpaceTypeProvider) super.createTypeProvider();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public BundleSpaceTypeProvider findTypeProvider(ResourceSet resourceSet) {
 		return (BundleSpaceTypeProvider) super.findTypeProvider(resourceSet);

@@ -106,7 +106,7 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	private AtomicBoolean resolved = new AtomicBoolean(false);
 
 	@Activate
-	public void activate(ComponentContext context) {
+	public synchronized void activate(ComponentContext context) {
 		this.context = context;
 		new ServiceActivatedTask().run();
 	}
@@ -119,8 +119,9 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	 * {@inheritDoc}
 	 */
 	@Deactivate
-	public void deactivate() {
+	public synchronized void deactivate() {
 		new ServiceDeactivatedTask().run();
+		this.context = null;
 	}
 
 	/**
@@ -201,6 +202,10 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 		if (!unloadResources && !removeFromResourceset) {
 			return;
 		}
+		if (!isActive()) {
+			return;
+		}
+
 		for (URL url : urls) {
 			LOGGER.info("Unregistered " + url.toString());
 			Resource rs = resourceSet.getResource(
@@ -208,7 +213,7 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 			if (unloadResources) {
 				rs.unload();
 			}
-			if (removeFromResourceset) {
+			if (removeFromResourceset && resourceSet.getResources() != null) {
 				resourceSet.getResources().remove(rs);
 			}
 		}
@@ -236,7 +241,7 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	 * @param bundle
 	 */
 	private void unresolveModels(Bundle bundle) {
-		if (resourceSet == null) {
+		if (!isActive()) {
 			return;
 		}
 		List<URL> urls = doFindModels(bundle);
@@ -389,8 +394,8 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 
 			List<URL> temp = doFindModels(bundle, participant);
 			if (temp.size() > 0) {
-				// adds the bundle to the bundleSpace if header is available
 				doAddToBundleSpace(bundle);
+				modelProviders.add(bundle);
 			}
 
 			result.addAll(temp);
@@ -400,7 +405,7 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	}
 
 	@Override
-	public void bundleChanged(BundleEvent event) {
+	public synchronized void bundleChanged(BundleEvent event) {
 		if (event.getType() == BundleEvent.STARTED) {
 			new BundleAddedTask(event.getBundle()).run();
 		} else if (event.getType() == BundleEvent.STOPPED) {
@@ -414,7 +419,7 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	 * @param participant
 	 */
 	@Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC, unbind = "removeParticipant")
-	public void addParticipant(IBuilderParticipant participant) {
+	public synchronized void addParticipant(IBuilderParticipant participant) {
 		new ParticipantAddedTask(participant).run();
 	}
 
@@ -465,7 +470,11 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 
 		List<Issue> validationResults = validate(resourceSet);
 		for (Issue issue : validationResults) {
-			LOGGER.warn(issue.toString());
+			if (issue.getSeverity() == Severity.ERROR) {
+				LOGGER.error(issue.toString());
+			} else {
+				LOGGER.warn(issue.toString());
+			}
 		}
 
 		LOGGER.info("Models resolved. In case of error, see messages before.");
@@ -498,7 +507,7 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	 * 
 	 * @param participant
 	 */
-	public void removeParticipant(IBuilderParticipant participant) {
+	public synchronized void removeParticipant(IBuilderParticipant participant) {
 		new ParticipantRemovedTask(participant).run();
 	}
 
@@ -539,12 +548,12 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	}
 
 	@Override
-	public void addToBundleSpace(Bundle bundle) {
+	public synchronized void addToBundleSpace(Bundle bundle) {
 		new AddBundleToBundleSpaceTask(bundle).run();
 	}
 
 	@Override
-	public void removeFromBundleSpace(Bundle bundle) {
+	public synchronized void removeFromBundleSpace(Bundle bundle) {
 		new RemoveBundleFromBundleSpaceTask(bundle).run();
 	}
 
@@ -759,6 +768,10 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 
 		@Override
 		public void run() {
+			if (!isActive()) {
+				return;
+			}
+
 			// remove the bundle from the bundle space
 			removeFromBundleSpace(bundle);
 

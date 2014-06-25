@@ -25,6 +25,7 @@ import org.osgi.framework.BundleException;
 
 public class DomainModelBuilderParticipantTests {
 
+	private static final String ENTITY_NAME = "Simple";
 	private static final String ENTITY = "org.my.tests.Simple";
 	private static final int TIME_500 = 500;
 	private static final int TIME_1000 = 1000;
@@ -60,7 +61,7 @@ public class DomainModelBuilderParticipantTests {
 		Thread.sleep(TIME_2000);
 		
 		Entity entity = findEntity(builderService);
-		assertEquals("Simple", entity.getName());
+		assertEquals(ENTITY_NAME, entity.getName());
 
 		builderBundle.stop();
 		Thread.sleep(TIME_500);
@@ -75,7 +76,7 @@ public class DomainModelBuilderParticipantTests {
 		assertNotNull(builderService);
 
 		Entity entity2 = findEntity(builderService);
-		assertEquals("Simple", entity2.getName());
+		assertEquals(ENTITY_NAME, entity2.getName());
 
 		assertNotSame(entity, entity2);
 
@@ -105,10 +106,10 @@ public class DomainModelBuilderParticipantTests {
 		Thread.sleep(TIME_2000);
 		
 		Entity entity = findEntity(builderService);
-		assertEquals(ENTITY, entity.getName());
+		assertEquals(ENTITY_NAME, entity.getName());
 
 		Entity entity2 = findEntity(builderService);
-		assertEquals(ENTITY, entity.getName());
+		assertEquals(ENTITY_NAME, entity.getName());
 
 		InternalEObject iEntity = (InternalEObject) entity;
 		assertFalse(iEntity.eIsProxy());
@@ -141,7 +142,7 @@ public class DomainModelBuilderParticipantTests {
 		Thread.sleep(TIME_500);
 
 		entity = findEntity(builderService);
-		assertEquals(entity, entity.getName());
+		assertEquals(ENTITY_NAME, entity.getName());
 
 		// stop and start again
 		participantBundle.stop();
@@ -151,7 +152,7 @@ public class DomainModelBuilderParticipantTests {
 
 		Entity entity3 = findEntity(builderService);
 		assertNotNull(entity3);
-		assertEquals(ENTITY, entity3.getName());
+		assertEquals(ENTITY_NAME, entity3.getName());
 
 		// assert that the entity loaded before stopping the service has
 		// changed to an eProxy

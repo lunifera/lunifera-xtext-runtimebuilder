@@ -36,12 +36,16 @@
 		<!-- P2 bundles -->
 		<module>org.lunifera.xtext.builder.metadata.services</module>
 		<module>org.lunifera.xtext.builder.types.bundles</module>
+		<module>org.lunifera.xtext.builder.xbase.setups</module>
 		<module>org.lunifera.xtext.builder.participant.jvmtypes</module>
 		<module>org.lunifera.xtext.builder.participant.xbase</module>
 		<module>org.lunifera.xtext.builder.participant.jvmtypes.tests</module>
 		<module>org.lunifera.xtext.builder.participant.jvmtypes.extender.tests</module>
 		<module>org.lunifera.xtext.builder.participant.xbase.tests</module>
 		<module>org.lunifera.xtext.builder.participant.xbase.extender.tests</module>
+		
+		<!-- External bundles for test-->
+		<module>org.eclipse.xtext.example.domainmodel</module>
 		
 		<!--  Example for test -->
 		<module>org.lunifera.xtext.builder.participant.dmodelsample</module>

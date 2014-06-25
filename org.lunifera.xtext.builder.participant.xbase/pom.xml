@@ -21,6 +21,10 @@
 
 	<artifactId>org.lunifera.xtext.builder.participant.xbase</artifactId>
 	<packaging>eclipse-plugin</packaging>
+	<name>XBase Builder Participant</name>
+	<description>This bundle contains a builder participant. It will setup the Xbase with annotations grammar and exposes a service IXbaseMetadataService.
+
+Using the method &quot;Grammar getGrammar(String)&quot; a grammar object for the given name will be returned.  bundles installed in the OSGi container will be used to resolve all available Xtext models.</description>
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>

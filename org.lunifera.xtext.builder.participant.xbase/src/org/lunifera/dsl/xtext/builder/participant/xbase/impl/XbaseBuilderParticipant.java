@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2011 - 2014, Lunifera GmbH (Gross Enzersdorf), Loetz KG (Heidelberg)
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors: 
+ * 		Florian Pirchner - Initial implementation
+ */
 package org.lunifera.dsl.xtext.builder.participant.xbase.impl;
 
 import java.net.URL;
@@ -14,6 +24,7 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.lunifera.dsl.xtext.builder.participant.xbase.IXbaseMetadataService;
 import org.lunifera.xtext.builder.metadata.services.IBuilderParticipant;
 import org.lunifera.xtext.builder.metadata.services.IMetadataBuilderService;
+import org.lunifera.xtext.builder.xbase.setups.XbaseWithAnnotationsBundleSpaceStandaloneSetup;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.framework.wiring.BundleWiring;
@@ -24,6 +35,7 @@ import org.osgi.service.component.annotations.Deactivate;
 
 import com.google.inject.Inject;
 
+@SuppressWarnings("restriction")
 @Component
 public class XbaseBuilderParticipant implements IBuilderParticipant {
 

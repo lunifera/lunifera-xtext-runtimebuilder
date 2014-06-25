@@ -1,10 +1,12 @@
 package org.lunifera.xtext.builder.participant.dmodelsample.impl;
 
 import org.eclipse.xtext.example.domainmodel.DomainmodelStandaloneSetup;
+import org.lunifera.xtext.builder.xbase.setups.XbaseBundleSpaceStandaloneSetup;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+@SuppressWarnings("restriction")
 public class DomainmodelBundleSpaceStandaloneSetup extends
 		DomainmodelStandaloneSetup {
 

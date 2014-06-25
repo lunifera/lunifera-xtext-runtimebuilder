@@ -25,4 +25,8 @@
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 	</build>
+	<name>Builder Implementation</name>
+	<description>Contains the implementation of the builder service and exposes the IMetadataBuilderService as an OSGi service.
+
+Interested parties can join the build by exposing an implementation of IBuilderParticipant.</description>
 </project>

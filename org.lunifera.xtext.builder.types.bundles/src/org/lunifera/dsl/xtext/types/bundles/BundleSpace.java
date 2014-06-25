@@ -55,6 +55,14 @@ public class BundleSpace {
 		this.classNameUtil = new ClassNameUtil();
 	}
 
+	/**
+	 * Tries to find a class for the given class name using the bundles
+	 * registered in the bundle space.
+	 * 
+	 * @param name
+	 * @return
+	 * @throws ClassNotFoundException
+	 */
 	public Class<?> forName(String name) throws ClassNotFoundException {
 		Class<?> result = null;
 		synchronized (cache) {
@@ -90,6 +98,12 @@ public class BundleSpace {
 		return result;
 	}
 
+	/**
+	 * Adds a new bundle to the bundle space. The bundle will be used to find
+	 * classes.
+	 * 
+	 * @param bundle
+	 */
 	public void add(Bundle bundle) {
 		bundles.add(bundle);
 
@@ -98,6 +112,11 @@ public class BundleSpace {
 		}
 	}
 
+	/**
+	 * Removes the bundle from the bundle space.
+	 * 
+	 * @param bundle
+	 */
 	public void remove(Bundle bundle) {
 		bundles.remove(bundle);
 	}

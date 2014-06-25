@@ -44,18 +44,18 @@ public class BundleSpaceTypeProvider extends AbstractRuntimeJvmTypeProvider {
 		reflectionTypeFactory = new ReflectionTypeFactory(uriHelper);
 	}
 
-	public ReflectURIHelper getClassURIHelper() {
-		return uriHelper;
-	}
-
+	/**
+	 * Returns the type factory used.
+	 * 
+	 * @return
+	 */
 	public ReflectionTypeFactory getDeclaredTypeFactory() {
 		return reflectionTypeFactory;
 	}
 
-	public BundleSpace getClassFinder() {
-		return classFinder;
-	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public JvmType findTypeByName(String name) {
 		try {
@@ -78,7 +78,7 @@ public class BundleSpaceTypeProvider extends AbstractRuntimeJvmTypeProvider {
 	}
 
 	/**
-	 * @since 2.4
+	 * {@inheritDoc}
 	 */
 	@Override
 	public JvmType findTypeByName(String name, boolean binaryNestedTypeDelimiter) {
@@ -147,6 +147,13 @@ public class BundleSpaceTypeProvider extends AbstractRuntimeJvmTypeProvider {
 		}
 	}
 
+	/**
+	 * Uses the index to find the type by its name.
+	 * 
+	 * @param name
+	 * @param binaryNestedTypeDelimiter
+	 * @return
+	 */
 	protected JvmType tryFindTypeInIndex(String name,
 			boolean binaryNestedTypeDelimiter) {
 		TypeInResourceSetAdapter adapter = (TypeInResourceSetAdapter) EcoreUtil
@@ -160,6 +167,9 @@ public class BundleSpaceTypeProvider extends AbstractRuntimeJvmTypeProvider {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected IMirror createMirrorForFQN(String name) {
 		try {
@@ -170,10 +180,23 @@ public class BundleSpaceTypeProvider extends AbstractRuntimeJvmTypeProvider {
 		}
 	}
 
+	/**
+	 * Creates a mirror for the given class.
+	 * 
+	 * @param clazz
+	 * @return
+	 */
 	public ClassMirror createMirror(Class<?> clazz) {
 		return ClassMirror.createClassMirror(clazz, reflectionTypeFactory);
 	}
 
+	/**
+	 * Tries to find the type for the given class and resource.
+	 * 
+	 * @param clazz
+	 * @param resource
+	 * @return
+	 */
 	public JvmType findTypeByClass(Class<?> clazz, Resource resource) {
 		String fragment = uriHelper.getFragment(clazz);
 		JvmType result = (JvmType) resource.getEObject(fragment);
