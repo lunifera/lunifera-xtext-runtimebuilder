@@ -43,11 +43,11 @@
 		<module>org.lunifera.xtext.builder.participant.jvmtypes.extender.tests</module>
 		<module>org.lunifera.xtext.builder.participant.xbase.tests</module>
 		<module>org.lunifera.xtext.builder.participant.xbase.extender.tests</module>
-		
-		<!-- External bundles for test-->
+
+		<!-- External bundles for test -->
 		<module>org.eclipse.xtext.example.domainmodel</module>
-		
-		<!--  Example for test -->
+
+		<!-- Example for test -->
 		<module>org.lunifera.xtext.builder.participant.dmodelsample</module>
 		<module>org.lunifera.xtext.builder.participant.dmodelsample.tests</module>
 	</modules>
@@ -86,6 +86,37 @@
 			<modules>
 				<module>org.lunifera.xtext.builder.p2</module>
 			</modules>
+		</profile>
+		<profile>
+			<id>prepare-for-next-release</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<defaultGoal>org.eclipse.tycho:tycho-versions-plugin:set-version</defaultGoal>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-versions-plugin</artifactId>
+						<version>${tycho-version}</version>
+						<executions>
+							<execution>
+								<id>change-next-release</id>
+								<goals>
+									<goal>set-version</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<newVersion>${next-release}</newVersion>
+							<artifacts>org.lunifera.xtext.builder.aggregator,
+								org.lunifera.xtext.builder.parent,
+								org.lunifera.xtext.builder.p2
+							</artifacts>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 </project>
