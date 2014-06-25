@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lunifera.xtext.builder.metadata.services.AbstractBuilderParticipant;
 import org.lunifera.xtext.builder.metadata.services.IBuilderParticipant;
 import org.lunifera.xtext.builder.metadata.services.IMetadataBuilderService;
 import org.osgi.framework.Bundle;
@@ -16,7 +17,7 @@ import org.osgi.service.component.annotations.Deactivate;
 import com.google.inject.Inject;
 
 @Component
-public class DomainmodelBuilderParticipant implements IBuilderParticipant {
+public class DomainmodelBuilderParticipant extends AbstractBuilderParticipant {
 
 	@Inject
 	private IMetadataBuilderService metadataBuilderService;

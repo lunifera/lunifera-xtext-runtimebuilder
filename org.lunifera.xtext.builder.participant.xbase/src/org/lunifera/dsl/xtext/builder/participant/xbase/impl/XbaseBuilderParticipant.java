@@ -22,6 +22,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.lunifera.dsl.xtext.builder.participant.xbase.IXbaseMetadataService;
+import org.lunifera.xtext.builder.metadata.services.AbstractBuilderParticipant;
 import org.lunifera.xtext.builder.metadata.services.IBuilderParticipant;
 import org.lunifera.xtext.builder.metadata.services.IMetadataBuilderService;
 import org.lunifera.xtext.builder.xbase.setups.XbaseWithAnnotationsBundleSpaceStandaloneSetup;
@@ -37,7 +38,7 @@ import com.google.inject.Inject;
 
 @SuppressWarnings("restriction")
 @Component
-public class XbaseBuilderParticipant implements IBuilderParticipant {
+public class XbaseBuilderParticipant extends AbstractBuilderParticipant {
 
 	@Inject
 	private IMetadataBuilderService metadataBuilderService;

@@ -11,6 +11,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.lunifera.dsl.xtext.builder.participant.jvmtypes.IJvmTypeMetadataService;
+import org.lunifera.xtext.builder.metadata.services.AbstractBuilderParticipant;
 import org.lunifera.xtext.builder.metadata.services.IBuilderParticipant;
 import org.lunifera.xtext.builder.metadata.services.IMetadataBuilderService;
 import org.osgi.framework.Bundle;
@@ -23,7 +24,7 @@ import org.osgi.service.component.annotations.Deactivate;
 import com.google.inject.Inject;
 
 @Component
-public class JvmTypesBuilderParticipant implements IBuilderParticipant {
+public class JvmTypesBuilderParticipant extends AbstractBuilderParticipant {
 
 	@Inject
 	private XtextResourceSet resourceSet;

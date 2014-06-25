@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" activate="activate" deactivate="deactivate" name="org.lunifera.xtext.builder.participant.dmodelsample.impl.DomainmodelBuilderParticipant">
    <implementation class="org.lunifera.xtext.builder.participant.dmodelsample.impl.DomainmodelBuilderParticipant"/>
-   <service>
-      <provide interface="org.lunifera.xtext.builder.metadata.services.IBuilderParticipant"/>
-   </service>
 </scr:component>

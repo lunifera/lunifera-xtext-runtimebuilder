@@ -11,7 +11,6 @@
 package org.lunifera.xtext.builder.metadata.services;
 
 import java.net.URL;
-import java.util.Collections;
 import java.util.List;
 
 import org.osgi.framework.Bundle;
@@ -20,12 +19,12 @@ public abstract class AbstractBuilderParticipant implements IBuilderParticipant 
 
 	@Override
 	public List<URL> getModels(Bundle suspect) {
-		return Collections.emptyList();
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void notifyLifecyle(LifecycleEvent event) {
-
+		throw new UnsupportedOperationException();
 	}
 
 }
