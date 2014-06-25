@@ -45,7 +45,8 @@
 			org.lunifera.xtext.builder.participant.jvmtypes.tests,
 			org.lunifera.xtext.builder.participant.jvmtypes.extender.tests,
 			org.lunifera.xtext.builder.participant.xbase.extender.tests,
-			org.lunifera.xtext.builder.participant.xbase.tests
+			org.lunifera.xtext.builder.participant.xbase.tests,
+			org.eclipse.xtext.example.domainmodel
 		</sonar.skippedModules>
 	</properties>
 
