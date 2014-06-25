@@ -119,4 +119,5 @@
 			</build>
 		</profile>
 	</profiles>
+<version>0.7.0</version>
 </project>
