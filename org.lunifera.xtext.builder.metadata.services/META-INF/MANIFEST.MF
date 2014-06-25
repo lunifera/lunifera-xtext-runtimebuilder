@@ -5,7 +5,7 @@ Bundle-Vendor: Lunifera.org
 Bundle-Version: 0.0.1.qualifier
 Bundle-SymbolicName: org.lunifera.xtext.builder.metadata.services
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.lunifera.xtext.builder.metadata.services
+Export-Package: org.lunifera.xtext.builder.metadata.services;version="0.0.1"
 Require-Bundle: com.google.guava;bundle-version="[10.0.1,11.0.0)",
  org.objectweb.asm;bundle-version="3.3.1",
  org.lunifera.xtext.builder.types.bundles;bundle-version="0.0.1",
