@@ -20,7 +20,6 @@
 	</parent>
 
 	<artifactId>org.eclipse.xtext.example.domainmodel</artifactId>
-	<version>2.5.4</version>
 	<packaging>eclipse-plugin</packaging>
 	
 	<name>Xtext domainmodel sample</name>
@@ -54,4 +53,5 @@
 			</plugin>
 		</plugins>
 	</build>
+	<version>2.6.1-SNAPSHOT</version>
 </project>
