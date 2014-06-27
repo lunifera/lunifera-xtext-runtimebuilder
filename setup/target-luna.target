@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target includeMode="feature" name="org.lunifera.xtext.builder.target.kepler" sequenceNumber="41">
+<locations>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.equinox.sdk.feature.group" version="3.10.0.v20140606-1602"/>
+<repository location="http://download.eclipse.org/releases/luna"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.xtend.sdk.feature.group" version="2.6.1.v201406120726"/>
+<unit id="org.eclipse.xtext.xbase.feature.group" version="2.6.1.v201406120726"/>
+<unit id="org.eclipse.xtext.ui.feature.group" version="2.6.1.v201406120726"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.6.1.v201406120726"/>
+<unit id="org.eclipse.xtext.runtime.feature.group" version="2.6.1.v201406120726"/>
+<unit id="org.eclipse.xtext.redist.feature.group" version="2.6.1.v201406120726"/>
+<unit id="org.eclipse.xtext.license.feature.group" version="2.6.0.v201406120726"/>
+<unit id="org.eclipse.xtext.examples.feature.group" version="2.6.1.v201406120726"/>
+<unit id="org.eclipse.xtext.docs.feature.group" version="2.6.1.v201406120726"/>
+<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.lunifera.dependencies.feature.assert-utilities.feature.group" version="1.2.2.2"/>
+<repository location="http://lun.lunifera.org/downloads/p2/lunifera/luna/latest/"/>
+</location>
+</locations>
+</target>

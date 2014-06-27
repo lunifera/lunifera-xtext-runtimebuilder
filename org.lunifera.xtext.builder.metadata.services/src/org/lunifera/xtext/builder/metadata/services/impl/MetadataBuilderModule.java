@@ -51,6 +51,13 @@ public class MetadataBuilderModule extends AbstractGenericModule {
 				.to(ResourceSetBasedResourceDescriptions.class);
 	}
 
+	public void configurePeristedProviderScope(com.google.inject.Binder binder) {
+		binder.bind(IResourceDescriptions.class)
+				.annotatedWith(
+						Names.named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS))
+				.to(ResourceSetBasedResourceDescriptions.class);
+	}
+
 	@SingletonBinding
 	public Class<? extends IResourceDescriptions> bindIResourceDescriptions() {
 		return ResourceSetBasedResourceDescriptions.class;
