@@ -204,5 +204,5 @@
 	<!-- <version>${project.version}</version> -->
 	<!-- </dependency> -->
 	<!-- </dependencies> -->
-<version>0.7.1-SNAPSHOT</version>
+<version>0.8.0</version>
 </project>
