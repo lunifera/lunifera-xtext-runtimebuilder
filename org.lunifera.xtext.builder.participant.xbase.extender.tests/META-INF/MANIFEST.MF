@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.lunifera.xtext.builder.participant.xbase.extender.tests
 Bundle-Vendor: Lunifera.org
-Bundle-Version: 0.8.0
+Bundle-Version: 0.8.1.qualifier
 Bundle-SymbolicName: org.lunifera.xtext.builder.participant.xbase.extender.tests
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
