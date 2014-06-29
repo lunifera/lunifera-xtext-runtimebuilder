@@ -18,13 +18,13 @@
    </license>
 
    <url>
-      <discovery label="Xtext 2.5.0" url="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"/>
+      <discovery label="Xtext releases" url="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"/>
       <discovery label="Kepler" url="http://download.eclipse.org/releases/kepler"/>
    </url>
 
    <requires>
-      <import feature="org.eclipse.xtext.sdk" version="2.5.4" match="greaterOrEqual"/>
-      <import feature="org.lunifera.xtext.builder.feature.runtime" version="0.0.1.qualifier"/>
+      <import feature="org.eclipse.xtext.sdk" version="0.0.0"/>
+      <import feature="org.lunifera.xtext.builder.feature.runtime" version="0.0.0"/>
    </requires>
 
    <plugin
