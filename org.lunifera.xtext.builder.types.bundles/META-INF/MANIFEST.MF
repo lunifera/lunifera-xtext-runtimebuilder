@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.lunifera.xtext.builder.types.bundles
 Bundle-Vendor: Lunifera.org
-Bundle-Version: 0.8.1.qualifier
+Bundle-Version: 0.8.1
 Bundle-SymbolicName: org.lunifera.xtext.builder.types.bundles
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
