@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.lunifera.xtext.builder.participant.dmodelsample
 Bundle-Vendor: Lunifera.org
-Bundle-Version: 0.8.1
+Bundle-Version: 0.8.2.qualifier
 Bundle-SymbolicName: org.lunifera.xtext.builder.participant.dmodelsample
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: com.google.guava;bundle-version="15.0.0",
@@ -23,5 +23,5 @@ Import-Package: org.osgi.framework;version="1.7.0",
  org.slf4j;version="1.7.2"
 Service-Component: OSGI-INF/org.lunifera.xtext.builder.participant.dmodelsample.impl.DomainmodelBuilderParticipant.xml
 Export-Package: org.lunifera.xtext.builder.participant.dmodelsample.im
- pl;version="0.8.1";x-internal:=true
+ pl;version="0.8.2";x-internal:=true
 Bundle-ActivationPolicy: lazy

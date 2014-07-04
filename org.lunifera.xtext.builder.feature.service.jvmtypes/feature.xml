@@ -2,7 +2,7 @@
 <feature
       id="org.lunifera.xtext.builder.feature.service.jvmtypes"
       label="%featureName"
-      version="0.8.1"
+      version="0.8.2.qualifier"
       provider-name="%providerName">
 
    <description>
