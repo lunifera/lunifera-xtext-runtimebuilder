@@ -207,6 +207,11 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 		}
 
 		for (URL url : urls) {
+
+			if (filter(url)) {
+				continue;
+			}
+
 			LOGGER.info("Unregistered " + url.toString());
 			Resource rs = resourceSet.getResource(
 					URI.createURI(url.toString()), true);
@@ -332,16 +337,6 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 			modelProviders.add(suspect);
 		}
 
-		// Set<String> fragments = new HashSet<String>();
-		// for (Iterator<URL> iterator = result.iterator(); iterator.hasNext();)
-		// {
-		// URL url = iterator.next();
-		// URI uri = URI.createURI(url.toString());
-		// if (fragments.contains(uri.fragment())) {
-		// iterator.remove();
-		// }
-		// }
-
 		return result;
 	}
 
@@ -431,6 +426,10 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 			for (URL url : doFindModels(bundle)) {
 				LOGGER.info("Adding model " + url.toString()
 						+ " to model cache.");
+				if (filter(url)) {
+					continue;
+				}
+
 				resourceSet.getResource(URI.createURI(url.toString()), true);
 
 				// adds the bundle to the bundleSpace if header is available
@@ -453,6 +452,14 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 		LOGGER.info("Models resolved. In case of error, see messages before.");
 	}
 
+	private boolean filter(URL url) {
+		if (url.toExternalForm().contains("META-INF/maven")) {
+			return true;
+		}
+
+		return false;
+	}
+
 	/**
 	 * Resolves all models for the given participant. Therefore <b>all
 	 * bundles</b> are used.
@@ -461,6 +468,10 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	 */
 	private void doScanAllBundles(IBuilderParticipant participant) {
 		for (URL url : doFindAllModelsForNewParticipant(participant)) {
+			if (filter(url)) {
+				continue;
+			}
+
 			LOGGER.info("Adding model " + url.toString() + " to model cache.");
 			resourceSet.getResource(URI.createURI(url.toString()), true);
 		}
