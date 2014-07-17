@@ -4,7 +4,7 @@ Bundle-Name: org.lunifera.xtext.builder.ui.access
 Bundle-Vendor: Lunifera.org
 Bundle-Version: 0.8.2.qualifier
 Bundle-SymbolicName: org.lunifera.xtext.builder.ui.access
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: com.google.guava;bundle-version="15.0.0",
  org.eclipse.xtext;bundle-version="[2.6.0,2.7.0)",
  org.eclipse.xtext.ui.shared,
