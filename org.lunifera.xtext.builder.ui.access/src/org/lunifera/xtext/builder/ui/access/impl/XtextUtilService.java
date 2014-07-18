@@ -14,6 +14,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -67,6 +68,17 @@ public class XtextUtilService implements IXtextUtilService {
 	protected void deactivate(ComponentContext context) {
 		this.context = null;
 		injector = null;
+	}
+
+	@Override
+	public IProject getProject(String qualifiedName) {
+		IEObjectDescription temp = null;
+		for (IEObjectDescription desc : getEObjectDescriptionsForJvmTypes(qualifiedName)) {
+			temp = desc;
+			break;
+		}
+		IProject project = getProject(temp);
+		return project;
 	}
 
 	@Override
@@ -127,10 +139,17 @@ public class XtextUtilService implements IXtextUtilService {
 		return result;
 	}
 
-	public Class<?> loadClass(EClass eClass, String qualifiedName) {
+	private Iterable<IEObjectDescription> getEObjectDescriptionsForJvmTypes(
+			String qualifiedName) {
+		Iterable<IEObjectDescription> result = resourceDescriptions
+				.getExportedObjects(TypesPackage.Literals.JVM_TYPE,
+						QualifiedName.create(qualifiedName.split("\\.")), true);
+		return result;
+	}
+
+	public Class<?> loadClass(String qualifiedName) {
 		IEObjectDescription firstDesc = null;
-		for (IEObjectDescription desc : getEObjectDescriptions(eClass,
-				qualifiedName)) {
+		for (IEObjectDescription desc : getEObjectDescriptionsForJvmTypes(qualifiedName)) {
 			firstDesc = desc;
 			break;
 		}
@@ -144,10 +163,9 @@ public class XtextUtilService implements IXtextUtilService {
 		return null;
 	}
 
-	public Class<?> reloadClass(EClass eClass, String qualifiedName) {
+	public Class<?> reloadClass(String qualifiedName) {
 		IEObjectDescription firstDesc = null;
-		for (IEObjectDescription desc : getEObjectDescriptions(eClass,
-				qualifiedName)) {
+		for (IEObjectDescription desc : getEObjectDescriptionsForJvmTypes(qualifiedName)) {
 			firstDesc = desc;
 			break;
 		}

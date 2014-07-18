@@ -17,9 +17,18 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 public interface IXtextUtilService {
 
 	/**
+	 * Returns the project for the given qualified name that contains the java
+	 * class. Returns <code>null</code> if no project is involved.
+	 * 
+	 * @param eClass
+	 * @param qualifiedName
+	 * @return
+	 */
+	IProject getProject(String qualifiedName);
+
+	/**
 	 * Returns the project for the given eClass and qualified name that contains
-	 * the xtext model. Returns <code>null</code> if no java project is
-	 * involved.
+	 * the xtext model. Returns <code>null</code> if no project is involved.
 	 * 
 	 * @param eClass
 	 * @param qualifiedName
@@ -29,7 +38,8 @@ public interface IXtextUtilService {
 
 	/**
 	 * Returns a fully configured XtextResourceSet for the uri defined by eClass
-	 * and qualifiedName
+	 * and qualifiedName. It will hook up the java project from workspace and
+	 * installs a properly configured IJdtTypeProvider.
 	 * 
 	 * @param eClass
 	 * @param qualifiedName
@@ -39,20 +49,50 @@ public interface IXtextUtilService {
 			String qualifiedName);
 
 	/**
-	 * Loads the class for the given eClass and qualifiedName.
+	 * Loads the class for the given qualifiedName. Therefore the java project
+	 * containing the java class is determined and the class is loaded from the
+	 * workspace. To load the class an URLClassLoader is used. The parent
+	 * classloader is the bundle classloader from
+	 * org.lunifera.xtext.builder.ui.access. Since it defines a dynamic-import:
+	 * "*" all classes contained in the running IDE are loaded properly.
 	 * 
-	 * @param eClass
 	 * @param qualifiedName
 	 * @return
 	 */
-	Class<?> loadClass(EClass eClass, String qualifiedName);
+	Class<?> loadClass(String qualifiedName);
 
 	/**
-	 * Reloads the class using a new class loader.
+	 * See {@link #loadClass(String)}. The main difference is, that this method
+	 * uses a newly prepared class loader.
 	 * 
-	 * @param eClass
 	 * @param qualifiedName
 	 * @return
 	 */
-	Class<?> reloadClass(EClass eClass, String qualifiedName);
+	Class<?> reloadClass(String qualifiedName);
+
+	// /**
+	// * Loads the class for the given eClass and qualifiedName. Therefore the
+	// * java project involved is determined and the class is loaded from the
+	// * workspace. To load the class an URLClassLoader is used. The parent
+	// * classloader is the bundle classloader from
+	// * org.lunifera.xtext.builder.ui.access. Since it defines a
+	// dynamic-import:
+	// * "*" all classes contained in the running IDE are loaded properly.
+	// *
+	// * @param eClass
+	// * @param qualifiedName
+	// * @return
+	// */
+	// Class<?> loadClass(EClass eClass, String qualifiedName);
+	//
+	// /**
+	// * See {@link #loadClass(EClass, String)}. The main difference is, that
+	// this
+	// * method uses a newly prepared class loader.
+	// *
+	// * @param eClass
+	// * @param qualifiedName
+	// * @return
+	// */
+	// Class<?> reloadClass(EClass eClass, String qualifiedName);
 }
