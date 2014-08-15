@@ -2,12 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.lunifera.xtext.builder.participant.jvmtypes
 Bundle-Vendor: Lunifera.org
-Bundle-Version: 0.8.2.qualifier
+Bundle-Version: 0.8.3.qualifier
 Bundle-SymbolicName: org.lunifera.xtext.builder.participant.jvmtypes
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.lunifera.dsl.xtext.builder.participant.jvmtypes;ve
- rsion="0.8.2",org.lunifera.dsl.xtext.builder.participant.jvmtypes.imp
- l;version="0.8.2";x-internal:=true
+Export-Package: org.lunifera.dsl.xtext.builder.participant.jvmtypes;version="0.8.3",
+ org.lunifera.dsl.xtext.builder.participant.jvmtypes.impl;version="0.8.3";x-internal:="true"
 Require-Bundle: com.google.guava;bundle-version="15.0.0",
  org.objectweb.asm;bundle-version="3.3.1",
  org.eclipse.xtext.common.types;bundle-version="[2.6.0,2.7.0)",

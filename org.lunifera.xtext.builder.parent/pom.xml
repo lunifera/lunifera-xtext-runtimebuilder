@@ -16,13 +16,14 @@
 
 	<parent>
 		<groupId>org.lunifera.releng.maven</groupId>
-		<artifactId>org.lunifera.releng.maven.parent.tycho</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<artifactId>lunifera-releng-maven-parent-tycho</artifactId>
+		<version>0.10.1-SNAPSHOT</version>
 		<relativePath />
 	</parent>
 
 	<groupId>org.lunifera.xtext.builder</groupId>
 	<artifactId>org.lunifera.xtext.builder.parent</artifactId>
+	<version>0.8.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<url>${distribution.site.url}</url>
@@ -38,7 +39,7 @@
 		<lunifera.deployment.p2.name>xtext.builder</lunifera.deployment.p2.name>
 		<lunifera.build.p2.project.name>org.lunifera.xtext.builder.p2</lunifera.build.p2.project.name>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<xtext.version>2.5.4</xtext.version>
+		<xtext.version>2.6.1</xtext.version>
 
 		<lunifera.jacoco.include>org.lunifera.xtext.builder.*</lunifera.jacoco.include>
 		<sonar.skippedModules>
@@ -124,5 +125,5 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-<version>0.8.2-SNAPSHOT</version>
+
 </project>
