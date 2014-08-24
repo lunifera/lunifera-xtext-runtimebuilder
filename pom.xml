@@ -58,7 +58,7 @@
 
 	<profiles>
 		<profile>
-			<id>build.features</id>
+			<id>lunifera.build.features</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
@@ -94,7 +94,7 @@
 		</profile>
 
 		<profile>
-			<id>build.p2</id>
+			<id>lunifera.build.p2</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
@@ -106,7 +106,7 @@
 			</modules>
 		</profile>
 		<profile>
-			<id>stage.p2</id>
+			<id>lunifera.stage.p2</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
