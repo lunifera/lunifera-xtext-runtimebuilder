@@ -36,6 +36,7 @@
 		<!-- P2 bundles -->
 		<module>org.lunifera.xtext.builder.metadata.services</module>
 		<module>org.lunifera.xtext.builder.types.bundles</module>
+		<module>org.lunifera.xtext.builder.ui.access</module>
 		<module>org.lunifera.xtext.builder.xbase.setups</module>
 		<module>org.lunifera.xtext.builder.participant.jvmtypes</module>
 		<module>org.lunifera.xtext.builder.participant.xbase</module>
