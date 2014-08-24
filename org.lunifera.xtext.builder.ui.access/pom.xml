@@ -15,7 +15,7 @@
 	<parent>
 		<groupId>org.lunifera.xtext.builder</groupId>
 		<artifactId>org.lunifera.xtext.builder.parent</artifactId>
-		<version>0.8.2-SNAPSHOT</version>
+		<version>0.8.3-SNAPSHOT</version>
 		<relativePath>../org.lunifera.xtext.builder.parent/pom.xml</relativePath>
 	</parent>
 
