@@ -179,7 +179,7 @@ To use the jdtTypeLoader take a look at UiModule class in the ui.access project.
 Xtext resources.
 
 
-#### ITypeLoader - in NON-UI environments with Lunifera Builder
+### ITypeLoader - in NON-UI environments with Lunifera Builder
 The IJdtTypeLoader is located in the bundle ```org.lunifera.xtext.builder.types.loader.runtime``` and it allows you to load classes
 from your BundleSpace (see description above).
 
