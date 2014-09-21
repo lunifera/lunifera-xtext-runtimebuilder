@@ -156,7 +156,7 @@ The artifacts are available by maven or P2 repository.
 
 TypeLoader
 =============================
-As explained before, calls may be loaded from different locations. It makes a big difference whether you are working
+As explained before, classes may be loaded from different locations. It makes a big difference whether you are working
 in the IDE or code runs in the Rumtime without an Eclipse UI.
 
 This projects added two different ways to load classes
