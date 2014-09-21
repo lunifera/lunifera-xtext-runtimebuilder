@@ -10,10 +10,9 @@
  */
 package org.lunifera.xtext.builder.ui.access.jdt;
 
-public interface IJdtTypeLoader {
+import org.lunifera.xtext.builder.types.loader.api.ITypeLoader;
 
-	Class<?> findTypeByName(String fullyQualifiedName);
-
-	void dispose();
+@SuppressWarnings("restriction")
+public interface IJdtTypeLoader extends ITypeLoader {
 
 }

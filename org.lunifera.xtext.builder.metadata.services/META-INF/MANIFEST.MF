@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.lunifera.xtext.builder.metadata.services
+Bundle-Name: org.lunifera.xtext.builder.metadata.services (Nerver install into IDE!)
 Bundle-Vendor: Lunifera.org
 Bundle-Version: 0.8.3.qualifier
 Bundle-SymbolicName: org.lunifera.xtext.builder.metadata.services

@@ -423,6 +423,9 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	 */
 	private void doScanAllBundles() {
 		for (Bundle bundle : context.getBundleContext().getBundles()) {
+			if (containsHeader(bundle, LUN_RUNTIME_BUILDER_BUNDLE_SPACE)) {
+				doAddToBundleSpace(bundle);
+			}
 			for (URL url : doFindModels(bundle)) {
 				LOGGER.info("Adding model " + url.toString()
 						+ " to model cache.");

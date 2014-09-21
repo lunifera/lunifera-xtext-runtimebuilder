@@ -1,0 +1,36 @@
+<!--#======================================================================= -->
+<!--# Copyright (c) 2011 - 2014, Lunifera GmbH (Gross Enzersdorf), -->
+<!--# Loetz KG (Heidelberg) -->
+<!--# All rights reserved. This program and the accompanying materials -->
+<!--# are made available under the terms of the Eclipse Public License v1.0 -->
+<!--# which accompanies this distribution, and is available at -->
+<!--# http://www.eclipse.org/legal/epl-v10.html -->
+<!--# -->
+<!--# Contributors: -->
+<!--# Florian Pirchner - Initial implementation -->
+<!--#======================================================================= -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.lunifera.xtext.builder</groupId>
+		<artifactId>org.lunifera.xtext.builder.parent</artifactId>
+		<version>0.8.3-SNAPSHOT</version>
+		<relativePath>../org.lunifera.xtext.builder.parent/pom.xml</relativePath>
+	</parent>
+
+	<artifactId>org.lunifera.xtext.builder.types.loader.api</artifactId>
+	<packaging>eclipse-plugin</packaging>
+	<name>TypeLoader - Classfinder API</name>
+
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+	</build>
+	<description>This bundle contains API to load classes.
+
+Two implementations are available for now.
+
+1) JdtTypeLoader - it is used to load classes including the workspace. Therefor it uses the JavaProjects available to search for classes and will load them using eclipse jdt. It is related to the eclipse UI and can not be used in runtime.
+
+2) TypeLoader - It is used to load classes based on a so called BundleSpace (see org.lunifera.xtext.builder.types.bundles) in runtime. It is necessary that XtextResource is configured with a BundleSpaceTypeProvider. The bundle space is created and configured by the lunifera Xtext runtime builder (org.lunifera.xtext.builder.metadata.services). If a MANIFEST.MF contains the bundle header &quot;Lun-RuntimeBuilder-BundleSpace&quot;, it is automatically added to the BundleSpace.</description>
+</project>

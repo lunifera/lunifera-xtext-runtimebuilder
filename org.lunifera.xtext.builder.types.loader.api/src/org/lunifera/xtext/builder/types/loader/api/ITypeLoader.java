@@ -8,13 +8,12 @@
  * Contributors: 
  * 		Florian Pirchner - Initial implementation
  */
-package org.lunifera.xtext.builder.ui.access.jdt;
+package org.lunifera.xtext.builder.types.loader.api;
 
-import org.eclipse.jdt.core.IJavaProject;
-import org.lunifera.xtext.builder.types.loader.api.ITypeLoaderProvider;
+public interface ITypeLoader {
 
-@SuppressWarnings("restriction")
-public interface IJdtTypeLoaderProvider extends ITypeLoaderProvider {
+	Class<?> findTypeByName(String fullyQualifiedName);
 
-	IJdtTypeLoader get(IJavaProject project);
+	void dispose();
+
 }
