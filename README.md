@@ -50,7 +50,7 @@ Using this service the grammar semantic model of any known Xtext grammar can be 
 	IXbaseMetadataService service = getService();
 	Grammar grammar = service.getGrammar("org.eclipse.xtext.Xtext")
 	
-	
+
 ## How it works
 The project implements a builder core. This core can become extended by so called "builder participants" and 
 by the OSGi extender pattern.
@@ -60,8 +60,8 @@ Xtext grammars that are based on Xbase and JvmTypes need to load the referenced 
 proper class loader is required. For now Xtext implements an JdtTypeProvider for the IDE and a ClasspathTypeProvider
 for standalone issues.
 
-Since we are working in an OSGi environment, the ClasspathType provider is not the perfect match. So that project
-prepared a so called BundleSpaceTypeProvider. Every class loading issue is delegated to the BundleSpace which will
+Since we are working in an OSGi environment, the ClasspathType provider is not the perfect match. So that repo
+provides a so called BundleSpaceTypeProvider. Every class loading issue is delegated to the BundleSpace, which will
 try to load the class by delegating to all registered bundles.
 
 #### Register bundles at BundleSpace
@@ -154,8 +154,45 @@ The artifacts are available by maven or P2 repository.
 	Maven --> http://maven.lunifera.org:8086/nexus/content/repositories/snapshots/org/lunifera/xtext/builder/
  
 
+TypeLoader
+=============================
+As exlpained before, calles may be loaded from different locations. It makes a big difference whether you are working
+in the IDE or code runs in the Rumtime without an Eclipse UI.
+
+This projects added two different ways to load classes
+
+### IJdtTypeLoader - in UI environments
+The IJdtTypeLoader is located in the bundle ```org.lunifera.xtext.builder.ui.access``` and it allows you to load classes
+from your java projects. It is perfect for preview issues. Imagine there is a Xtext grammar that infers JavaCode and puts
+it somewhere in a java project at the workspace. The running eclipse instance may then load the class from java project
+and directly use.
+
+#### IXtextUtilService
+The easiest way to consume classes from the workspace is the use of IXtextUtilService. It provides a lot of convenience methods
+to access classes.
+It also provides you access to a workspace project for a given fully qualified name of a java class.
+
+IXtextUtilService is an OSGi service component and will automatically startup.
+
+#### Directly use IJdtTypeLoader
+To use the jdtTypeLoader take a look at UiModule class in the ui.access project. It will configure Guice to inject it into your
+Xtext resources.
 
 
+#### ITypeLoader - in NON-UI environments with Lunifera Builder
+The IJdtTypeLoader is located in the bundle ```org.lunifera.xtext.builder.types.loader.runtime``` and it allows you to load classes
+from your BundleSpace (see description above).
+
+To use the bundle space type loader, you need to register it in the Guice-module. And it highly requires a BundleSpace setup.
+If BundleSpace is not configured to be used, the typeLoader will not be usable. But runtime environments using the Lunifera
+Xtext Builder will always use the BundleSpace.
+To see an example how to setup a runtime environment follow:
+
+```
+https://github.com/lunifera/lunifera-ecview-addons/tree/master/org.lunifera.ecview.dsl/src/org/lunifera/ecview/dsl
+classes: UIGrammarBundleSpaceRuntimeModule and UIGrammarBundleSpaceRuntimeSetup
+
+```
 
 
  
