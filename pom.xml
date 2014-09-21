@@ -20,6 +20,7 @@
 
 	<groupId>org.lunifera.xtext.builder</groupId>
 	<artifactId>org.lunifera.xtext.builder.aggregator</artifactId>
+	<version>0.8.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<url>${distribution.site.url}</url>
@@ -33,16 +34,18 @@
 
 	<modules>
 		<module>org.lunifera.xtext.builder.parent</module>
+
 		<!-- P2 bundles -->
 		<module>org.lunifera.xtext.builder.metadata.services</module>
-		<module>org.lunifera.xtext.builder.types.bundles</module>
-		<module>org.lunifera.xtext.builder.xbase.setups</module>
 		<module>org.lunifera.xtext.builder.participant.jvmtypes</module>
-		<module>org.lunifera.xtext.builder.participant.xbase</module>
-		<module>org.lunifera.xtext.builder.participant.jvmtypes.tests</module>
 		<module>org.lunifera.xtext.builder.participant.jvmtypes.extender.tests</module>
-		<module>org.lunifera.xtext.builder.participant.xbase.tests</module>
+		<module>org.lunifera.xtext.builder.participant.jvmtypes.tests</module>
+		<module>org.lunifera.xtext.builder.participant.xbase</module>
 		<module>org.lunifera.xtext.builder.participant.xbase.extender.tests</module>
+		<module>org.lunifera.xtext.builder.participant.xbase.tests</module>
+		<module>org.lunifera.xtext.builder.types.bundles</module>
+		<module>org.lunifera.xtext.builder.ui.access</module>
+		<module>org.lunifera.xtext.builder.xbase.setups</module>
 
 		<!-- External bundles for test -->
 		<module>org.eclipse.xtext.example.domainmodel</module>
@@ -50,39 +53,23 @@
 		<!-- Example for test -->
 		<module>org.lunifera.xtext.builder.participant.dmodelsample</module>
 		<module>org.lunifera.xtext.builder.participant.dmodelsample.tests</module>
+
+		<module>org.lunifera.xtext.builder.feature.types</module>
+		<module>org.lunifera.xtext.builder.feature.runtime</module>
+		<module>org.lunifera.xtext.builder.feature.service.jvmtypes</module>
+		<module>org.lunifera.xtext.builder.feature.service.xbase</module>
+		<module>org.lunifera.xtext.builder.types.loader.api</module>
+		<module>org.lunifera.xtext.builder.types.loader.runtime</module>
+		<module>org.lunifera.xtext.builder.feature.ui.access</module>
 	</modules>
 
 	<profiles>
 		<profile>
-			<id>build.features</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<modules>
-				<module>org.lunifera.xtext.builder.feature.types</module>
-				<module>org.lunifera.xtext.builder.feature.runtime</module>
-				<module>org.lunifera.xtext.builder.feature.service.jvmtypes</module>
-				<module>org.lunifera.xtext.builder.feature.service.xbase</module>
-				<module>org.lunifera.xtext.builder.feature.ui.access</module>
-			</modules>
-		</profile>
-
-		<profile>
 			<id>build.p2</id>
 			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<build>
-				<defaultGoal>clean verify</defaultGoal>
-			</build>
-			<modules>
-				<module>org.lunifera.xtext.builder.p2</module>
-			</modules>
-		</profile>
-		<profile>
-			<id>stage.p2</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
+				<property>
+					<name>lunifera.build.p2</name>
+				</property>
 			</activation>
 			<modules>
 				<module>org.lunifera.xtext.builder.p2</module>
@@ -120,5 +107,4 @@
 			</build>
 		</profile>
 	</profiles>
-<version>0.8.3-SNAPSHOT</version>
 </project>

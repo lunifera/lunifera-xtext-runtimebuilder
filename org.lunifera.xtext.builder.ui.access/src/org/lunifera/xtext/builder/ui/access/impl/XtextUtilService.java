@@ -35,7 +35,7 @@ import org.osgi.service.component.annotations.Deactivate;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-@SuppressWarnings({ "unused"})
+@SuppressWarnings({ "unused", "restriction" })
 @Component(service = { IXtextUtilService.class })
 public class XtextUtilService implements IXtextUtilService {
 

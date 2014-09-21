@@ -10,12 +10,11 @@
  */
 package org.lunifera.xtext.builder.ui.access.jdt;
 
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
+import org.lunifera.xtext.builder.types.loader.api.ITypeLoaderProvider;
 
-public interface IJdtTypeLoaderProvider {
-
-	IJdtTypeLoader get(ResourceSet resourceSet);
+@SuppressWarnings("restriction")
+public interface IJdtTypeLoaderProvider extends ITypeLoaderProvider {
 
 	IJdtTypeLoader get(IJavaProject project);
 }

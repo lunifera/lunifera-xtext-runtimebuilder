@@ -11,19 +11,31 @@
 package org.lunifera.xtext.builder.ui.access.impl;
 
 import org.eclipse.xtext.ui.shared.SharedStateModule;
+import org.lunifera.xtext.builder.types.loader.api.ITypeLoaderFactory;
+import org.lunifera.xtext.builder.types.loader.api.ITypeLoaderProvider;
 import org.lunifera.xtext.builder.ui.access.jdt.IJdtTypeLoaderFactory;
 import org.lunifera.xtext.builder.ui.access.jdt.IJdtTypeLoaderProvider;
 import org.lunifera.xtext.builder.ui.access.jdt.impl.JdtTypeLoaderFactory;
 import org.lunifera.xtext.builder.ui.access.jdt.impl.JdtTypeLoaderProvider;
 
+import com.google.inject.Binder;
+import com.google.inject.Singleton;
+
+@SuppressWarnings("restriction")
 public class UiModule extends SharedStateModule {
 
-	public Class<? extends IJdtTypeLoaderFactory> bindIJdtTypeLoaderFactory() {
-		return JdtTypeLoaderFactory.class;
+	public void configureITypeLoaderFactory(Binder binder) {
+		binder.bind(ITypeLoaderFactory.class).to(JdtTypeLoaderFactory.class)
+				.in(Singleton.class);
+		binder.bind(IJdtTypeLoaderFactory.class).to(JdtTypeLoaderFactory.class)
+				.in(Singleton.class);
 	}
 
-	public Class<? extends IJdtTypeLoaderProvider> bindIJdtTypeLoaderProvider() {
-		return JdtTypeLoaderProvider.class;
+	public void configureITypeLoaderProvider(Binder binder) {
+		binder.bind(ITypeLoaderProvider.class).to(JdtTypeLoaderProvider.class)
+				.in(Singleton.class);
+		binder.bind(IJdtTypeLoaderProvider.class)
+				.to(JdtTypeLoaderProvider.class).in(Singleton.class);
 	}
-	
+
 }

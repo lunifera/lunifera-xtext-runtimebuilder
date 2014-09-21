@@ -38,4 +38,9 @@ public class JdtTypeLoaderFactory implements IJdtTypeLoaderFactory {
 		return new JdtTypeLoader(javaProject);
 	}
 
+	@Override
+	public IJdtTypeLoader createTypeLoader(ResourceSet resourceSet) {
+		return createJdtTypeLoader(resourceSet);
+	}
+
 }

@@ -28,7 +28,7 @@
    </requires>
 
    <plugin
-         id="org.lunifera.xtext.builder.metadata.services"
+         id="org.lunifera.xtext.builder.ui.access"
          download-size="0"
          install-size="0"
          version="0.0.0"
