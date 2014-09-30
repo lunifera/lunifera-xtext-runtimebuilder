@@ -93,7 +93,7 @@ public class XtextUtilService implements IXtextUtilService {
 		return project;
 	}
 
-	private IProject getProject(IEObjectDescription desc) {
+	public IProject getProject(IEObjectDescription desc) {
 		IProject project = null;
 		if (desc != null) {
 			Iterable<Pair<IStorage, IProject>> storages = javaStateHelper

@@ -12,6 +12,7 @@ package org.lunifera.xtext.builder.ui.access;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 public interface IXtextUtilService {
@@ -25,6 +26,16 @@ public interface IXtextUtilService {
 	 * @return
 	 */
 	IProject getProject(String qualifiedName);
+
+	/**
+	 * Returns the project for the given description that contains the element.
+	 * Returns <code>null</code> if no project is involved.
+	 * 
+	 * @param eClass
+	 * @param qualifiedName
+	 * @return
+	 */
+	IProject getProject(IEObjectDescription description);
 
 	/**
 	 * Returns the project for the given eClass and qualified name that contains
