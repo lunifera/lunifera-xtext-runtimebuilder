@@ -23,7 +23,7 @@
 
 	<groupId>org.lunifera.xtext.builder</groupId>
 	<artifactId>org.lunifera.xtext.builder.p2</artifactId>
-	<version>0.8.4</version>
+	<version>0.8.5-SNAPSHOT</version>
 	<packaging>eclipse-repository</packaging>
 
 	<properties>
