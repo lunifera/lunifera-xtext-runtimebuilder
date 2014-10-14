@@ -423,6 +423,9 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	 */
 	private void doScanAllBundles() {
 		for (Bundle bundle : context.getBundleContext().getBundles()) {
+			if (bundle.getState() <= 2) {
+				continue;
+			}
 			if (containsHeader(bundle, LUN_RUNTIME_BUILDER_BUNDLE_SPACE)) {
 				doAddToBundleSpace(bundle);
 			}
