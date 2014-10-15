@@ -57,6 +57,8 @@ public class JdtTypeLoader implements IJdtTypeLoader {
 			throw new IllegalStateException(e);
 		} catch (MalformedURLException e) {
 			throw new IllegalStateException(e);
+		} catch(NoClassDefFoundError e){
+			// nothing to do
 		}
 
 		return null;
