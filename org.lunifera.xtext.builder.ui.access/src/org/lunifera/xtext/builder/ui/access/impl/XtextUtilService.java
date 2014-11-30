@@ -131,7 +131,7 @@ public class XtextUtilService implements IXtextUtilService {
 		return resourceSet;
 	}
 
-	private Iterable<IEObjectDescription> getEObjectDescriptions(EClass eClass,
+	public Iterable<IEObjectDescription> getEObjectDescriptions(EClass eClass,
 			String qualifiedName) {
 		Iterable<IEObjectDescription> result = resourceDescriptions
 				.getExportedObjects(eClass,

@@ -12,6 +12,7 @@ package org.lunifera.xtext.builder.ui.access;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
@@ -81,29 +82,15 @@ public interface IXtextUtilService {
 	 */
 	Class<?> reloadClass(String qualifiedName);
 
-	// /**
-	// * Loads the class for the given eClass and qualifiedName. Therefore the
-	// * java project involved is determined and the class is loaded from the
-	// * workspace. To load the class an URLClassLoader is used. The parent
-	// * classloader is the bundle classloader from
-	// * org.lunifera.xtext.builder.ui.access. Since it defines a
-	// dynamic-import:
-	// * "*" all classes contained in the running IDE are loaded properly.
-	// *
-	// * @param eClass
-	// * @param qualifiedName
-	// * @return
-	// */
-	// Class<?> loadClass(EClass eClass, String qualifiedName);
-	//
-	// /**
-	// * See {@link #loadClass(EClass, String)}. The main difference is, that
-	// this
-	// * method uses a newly prepared class loader.
-	// *
-	// * @param eClass
-	// * @param qualifiedName
-	// * @return
-	// */
-	// Class<?> reloadClass(EClass eClass, String qualifiedName);
+	/**
+	 * Returns the {@link EObjectDescription}s for the given eClass and
+	 * qualifiedName.
+	 * 
+	 * @param eClass
+	 * @param qualifiedName
+	 * @return
+	 */
+	Iterable<IEObjectDescription> getEObjectDescriptions(EClass eClass,
+			String qualifiedName);
+
 }
