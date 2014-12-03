@@ -21,7 +21,7 @@
 
 	<artifactId>org.eclipse.xtext.example.domainmodel</artifactId>
 	<packaging>eclipse-plugin</packaging>
-	
+
 	<name>Xtext domainmodel sample</name>
 	<description>This bundle is used for testing purposes.</description>
 
@@ -52,6 +52,12 @@
 				<artifactId>xtend-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.util</artifactId>
+			<version>2.7.3</version>
+		</dependency>
+
 	</build>
 	<version>2.7.3-SNAPSHOT</version>
 </project>
