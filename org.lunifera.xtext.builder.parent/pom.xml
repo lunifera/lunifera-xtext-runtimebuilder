@@ -39,7 +39,7 @@
 		<lunifera.deployment.p2.name>xtext.builder</lunifera.deployment.p2.name>
 		<lunifera.build.p2.project.name>org.lunifera.xtext.builder.p2</lunifera.build.p2.project.name>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<xtext.version>2.6.1</xtext.version>
+		<xtext.version>2.7.3</xtext.version>
 
 		<lunifera.jacoco.include>org.lunifera.xtext.builder.*</lunifera.jacoco.include>
 		<sonar.skippedModules>
