@@ -20,6 +20,7 @@
 	</parent>
 
 	<artifactId>org.eclipse.xtext.example.domainmodel</artifactId>
+	<version>2.7.3-SNAPSHOT</version>
 	<packaging>eclipse-plugin</packaging>
 
 	<name>Xtext domainmodel sample</name>
@@ -52,12 +53,12 @@
 				<artifactId>xtend-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+	</build>
+	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.util</artifactId>
 			<version>2.7.3</version>
 		</dependency>
-
-	</build>
-	<version>2.7.3-SNAPSHOT</version>
+	</dependencies>
 </project>
