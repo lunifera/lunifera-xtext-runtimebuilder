@@ -110,6 +110,7 @@
 			<plugin>
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>xtend-maven-plugin</artifactId>
+				<version>${xtext.version}</version>
 				<executions>
 					<execution>
 						<goals>
@@ -145,7 +146,12 @@
 			<dependency>
 				<groupId>org.eclipse.xtext</groupId>
 				<artifactId>org.eclipse.xtext.ecore</artifactId>
-				<version>2.5.1</version>
+				<version>${xtext.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>org.eclipse.xtend.lib</artifactId>
+				<version>2.7.3</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
