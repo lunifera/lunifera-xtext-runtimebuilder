@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.lunifera.xtext.builder.ui.access
 Bundle-Vendor: Lunifera.org
-Bundle-Version: 0.8.6
+Bundle-Version: 0.8.7.qualifier
 Bundle-SymbolicName: org.lunifera.xtext.builder.ui.access
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: com.google.guava;bundle-version="15.0.0",
