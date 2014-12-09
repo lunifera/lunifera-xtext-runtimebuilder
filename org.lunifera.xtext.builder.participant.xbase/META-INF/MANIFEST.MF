@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.lunifera.xtext.builder.participant.xbase
 Bundle-Vendor: Lunifera.org
-Bundle-Version: 0.8.5.qualifier
+Bundle-Version: 0.8.6
 Bundle-SymbolicName: org.lunifera.xtext.builder.participant.xbase
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: com.google.guava;bundle-version="15.0.0",
@@ -19,6 +19,6 @@ Import-Package: org.osgi.framework;version="1.7.0",
  org.osgi.service.component.annotations;version="1.2.0",
  org.slf4j;version="1.7.2"
 Service-Component: OSGI-INF/org.lunifera.dsl.xtext.builder.participant.xbase.impl.XbaseBuilderParticipant.xml
-Export-Package: org.lunifera.dsl.xtext.builder.participant.xbase;version="0.8.5",
- org.lunifera.dsl.xtext.builder.participant.xbase.impl;version="0.8.5";x-internal:="true"
+Export-Package: org.lunifera.dsl.xtext.builder.participant.xbase;version="0.8.6",
+ org.lunifera.dsl.xtext.builder.participant.xbase.impl;version="0.8.6";x-internal:="true"
 Bundle-ActivationPolicy: lazy
