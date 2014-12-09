@@ -15,13 +15,14 @@
 	<parent>
 		<groupId>org.lunifera.xtext.builder</groupId>
 		<artifactId>org.lunifera.xtext.builder.parent</artifactId>
-		<version>0.8.4</version>
+		<version>0.8.6</version>
 		<relativePath>../org.lunifera.xtext.builder.parent/pom.xml</relativePath>
 	</parent>
 
 	<artifactId>org.eclipse.xtext.example.domainmodel</artifactId>
+	<version>2.7.3-SNAPSHOT</version>
 	<packaging>eclipse-plugin</packaging>
-	
+
 	<name>Xtext domainmodel sample</name>
 	<description>This bundle is used for testing purposes.</description>
 
@@ -53,5 +54,11 @@
 			</plugin>
 		</plugins>
 	</build>
-	<version>2.6.1</version>
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.util</artifactId>
+			<version>2.7.3</version>
+		</dependency>
+	</dependencies>
 </project>

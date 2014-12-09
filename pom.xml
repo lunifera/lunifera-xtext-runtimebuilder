@@ -15,12 +15,12 @@
 	<parent>
 		<groupId>org.lunifera.releng.maven</groupId>
 		<artifactId>lunifera-releng-maven-parent-tycho</artifactId>
-		<version>0.10.1-SNAPSHOT</version>
+		<version>0.12.3-SNAPSHOT</version>
 	</parent>
 
 	<groupId>org.lunifera.xtext.builder</groupId>
 	<artifactId>org.lunifera.xtext.builder.aggregator</artifactId>
-	<version>0.8.4</version>
+	<version>0.8.6</version>
 	<packaging>pom</packaging>
 
 	<url>${distribution.site.url}</url>
@@ -51,8 +51,8 @@
 		<module>org.eclipse.xtext.example.domainmodel</module>
 
 		<!-- Example for test -->
-<!-- 		<module>org.lunifera.xtext.builder.participant.dmodelsample</module> -->
-<!-- 		<module>org.lunifera.xtext.builder.participant.dmodelsample.tests</module> -->
+		<module>org.lunifera.xtext.builder.participant.dmodelsample</module>
+		<module>org.lunifera.xtext.builder.participant.dmodelsample.tests</module>
 
 		<module>org.lunifera.xtext.builder.feature.types</module>
 		<module>org.lunifera.xtext.builder.feature.runtime</module>

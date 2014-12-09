@@ -1,1 +1,7 @@
 /lib
+/build.org.lunifera.xtext.builder.p2.kepler.latest.log.properties
+/build.org.lunifera.xtext.builder.p2.kepler.milestone.latest.log.properties
+/build.org.lunifera.xtext.builder.p2.luna.latest.log.properties
+/build.runtime-builder.kepler.latest.log.properties
+/target/
+/target/
