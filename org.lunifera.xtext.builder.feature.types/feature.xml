@@ -23,7 +23,7 @@
    </url>
 
    <requires>
-      <import feature="org.eclipse.xtext.sdk" version="0.0.0"/>
+      <import feature="org.eclipse.xtext.sdk" version="2.7.3"/>
    </requires>
 
    <plugin
