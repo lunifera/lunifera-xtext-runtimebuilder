@@ -12,6 +12,7 @@ package org.lunifera.xtext.builder.metadata.services;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.lunifera.dsl.xtext.types.bundles.BundleSpace;
 import org.osgi.framework.Bundle;
 
@@ -44,6 +45,14 @@ public interface IMetadataBuilderService {
 	 * @return
 	 */
 	EObject getMetadata(String qualifiedName, EClass type);
+
+	/**
+	 * Returns all {@link IEObjectDescription}s found for the given type.
+	 * 
+	 * @param type
+	 * @return
+	 */
+	Iterable<IEObjectDescription> getAllDescriptions(EClass type);
 
 	/**
 	 * Adds the given bundle to the {@link BundleSpace}, so it may be used to

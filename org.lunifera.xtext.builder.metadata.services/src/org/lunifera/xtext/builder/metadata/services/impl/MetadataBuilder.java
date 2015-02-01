@@ -151,9 +151,19 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 				.getExportedObjects(type, fqn, false);
 		for (IEObjectDescription desc : descriptions) {
 			result = desc.getEObjectOrProxy();
+			break;
 		}
 
 		return result;
+	}
+
+	@Override
+	public Iterable<IEObjectDescription> getAllDescriptions(EClass type) {
+		IResourceDescriptions resourceDescriptions = resourceDescriptionsProvider
+				.getResourceDescriptions(resourceSet);
+		Iterable<IEObjectDescription> descriptions = resourceDescriptions
+				.getExportedObjectsByType(type);
+		return descriptions;
 	}
 
 	/**
