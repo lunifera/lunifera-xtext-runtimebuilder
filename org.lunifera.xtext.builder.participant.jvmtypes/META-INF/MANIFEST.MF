@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.lunifera.xtext.builder.participant.jvmtypes
 Bundle-Vendor: Lunifera.org
-Bundle-Version: 0.9.0
+Bundle-Version: 0.9.1.qualifier
 Bundle-SymbolicName: org.lunifera.xtext.builder.participant.jvmtypes
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.lunifera.dsl.xtext.builder.participant.jvmtypes;version="0.8.7";uses:="org.eclipse.xtext.common.types",
