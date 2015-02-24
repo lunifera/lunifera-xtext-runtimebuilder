@@ -2,7 +2,7 @@
 <feature
       id="org.lunifera.xtext.builder.feature.ui.access"
       label="%featureName"
-      version="0.8.7.qualifier"
+      version="0.9.0"
       provider-name="%providerName">
 
    <description>
@@ -24,7 +24,7 @@
 
    <requires>
       <import feature="org.eclipse.xtext.sdk" version="2.7.3"/>
-      <import feature="org.lunifera.xtext.builder.feature.types" version="0.8.6"/>
+      <import feature="org.lunifera.xtext.builder.feature.types" version="0.9.0"/>
    </requires>
 
    <plugin
