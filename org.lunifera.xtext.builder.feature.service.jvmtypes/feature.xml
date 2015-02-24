@@ -2,7 +2,7 @@
 <feature
       id="org.lunifera.xtext.builder.feature.service.jvmtypes"
       label="%featureName"
-      version="0.8.6"
+      version="0.9.0"
       provider-name="%providerName">
 
    <description>
@@ -23,8 +23,8 @@
    </url>
 
    <requires>
-      <import feature="org.eclipse.xtext.sdk" version="0.0.0"/>
-      <import feature="org.lunifera.xtext.builder.feature.runtime" version="0.0.0"/>
+      <import feature="org.eclipse.xtext.sdk" version="2.7.3"/>
+      <import feature="org.lunifera.xtext.builder.feature.runtime" version="0.9.0"/>
    </requires>
 
    <plugin
