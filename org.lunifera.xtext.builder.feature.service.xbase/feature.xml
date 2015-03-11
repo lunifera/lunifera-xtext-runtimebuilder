@@ -19,12 +19,12 @@
 
    <url>
       <discovery label="Xtext releases" url="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"/>
-      <discovery label="Kepler" url="http://download.eclipse.org/releases/kepler"/>
+      <discovery label="Luna" url="http://download.eclipse.org/releases/luna"/>
    </url>
 
    <requires>
-      <import feature="org.eclipse.xtext.sdk" version="2.7.3"/>
-      <import feature="org.lunifera.xtext.builder.feature.runtime" version="0.9.0"/>
+      <import feature="org.eclipse.xtext.sdk" version="2.7.3" match="equivalent"/>
+      <import feature="org.lunifera.xtext.builder.feature.runtime" version="0.9.1" match="equivalent"/>
    </requires>
 
    <plugin
