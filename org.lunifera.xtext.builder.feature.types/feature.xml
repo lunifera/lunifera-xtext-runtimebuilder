@@ -22,10 +22,6 @@
       <discovery label="Luna" url="http://download.eclipse.org/releases/luna"/>
    </url>
 
-   <requires>
-      <import feature="org.eclipse.xtext.sdk" version="2.7.3" match="equivalent"/>
-   </requires>
-
    <plugin
          id="org.lunifera.xtext.builder.types.bundles"
          download-size="0"

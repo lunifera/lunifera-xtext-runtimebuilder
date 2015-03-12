@@ -23,7 +23,6 @@
    </url>
 
    <requires>
-      <import feature="org.eclipse.xtext.sdk" version="2.7.3" match="equivalent"/>
       <import feature="org.lunifera.xtext.builder.feature.runtime" version="0.9.1" match="equivalent"/>
    </requires>
 
