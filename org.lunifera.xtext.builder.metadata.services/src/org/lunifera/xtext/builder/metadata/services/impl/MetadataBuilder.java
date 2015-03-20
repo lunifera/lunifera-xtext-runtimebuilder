@@ -42,6 +42,7 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.lunifera.dsl.xtext.types.bundles.BundleSpace;
 import org.lunifera.dsl.xtext.types.bundles.BundleSpaceTypeProvider;
+import org.lunifera.runtime.common.types.IBundleSpace;
 import org.lunifera.xtext.builder.metadata.services.IBuilderParticipant;
 import org.lunifera.xtext.builder.metadata.services.IBuilderParticipant.LifecycleEvent;
 import org.lunifera.xtext.builder.metadata.services.IMetadataBuilderService;
@@ -50,6 +51,7 @@ import org.osgi.framework.BundleEvent;
 import org.osgi.framework.BundleListener;
 import org.osgi.framework.FrameworkEvent;
 import org.osgi.framework.FrameworkListener;
+import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -104,6 +106,8 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	private AtomicBoolean waitingForFrameworkStartedEvent = new AtomicBoolean(
 			true);
 	private AtomicBoolean resolved = new AtomicBoolean(false);
+
+	private ServiceRegistration<IBundleSpace> bundleSpaceRegistry;
 
 	@Activate
 	public synchronized void activate(ComponentContext context) {
@@ -655,6 +659,11 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 					.getInstance(ResourceDescriptionsProvider.class);
 			jvmTypeAccess = injector.getInstance(IndexedJvmTypeAccess.class);
 			bundleSpace = injector.getInstance(BundleSpace.class);
+
+			// register the bundle space
+			bundleSpaceRegistry = context.getBundleContext().registerService(
+					IBundleSpace.class, bundleSpace, null);
+
 			bundleSpace.add(context.getBundleContext().getBundle());
 
 			// Create the bundle space for class loading issues
@@ -818,6 +827,12 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 
 		@Override
 		public void run() {
+
+			if (bundleSpaceRegistry != null) {
+				bundleSpaceRegistry.unregister();
+				bundleSpaceRegistry = null;
+			}
+
 			context.getBundleContext().removeBundleListener(
 					MetadataBuilder.this);
 

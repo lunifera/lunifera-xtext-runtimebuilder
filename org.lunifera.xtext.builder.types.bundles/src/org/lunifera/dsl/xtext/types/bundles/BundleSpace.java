@@ -25,14 +25,14 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.access.impl.ClassNameUtil;
 import org.eclipse.xtext.common.types.access.impl.Primitives;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.lunifera.runtime.common.types.IBundleSpace;
 import org.osgi.framework.Bundle;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("restriction")
-public class BundleSpace {
+public class BundleSpace implements IBundleSpace {
 
-	protected static final ClassNotFoundException CACHED_EXCEPTION = new ClassNotFoundException();
 	private static final Class<?> NULL_CLASS;
 	@Inject
 	private XtextResourceSet resourceSet;
@@ -69,7 +69,7 @@ public class BundleSpace {
 			result = cache.get(name);
 			if (result != null) {
 				if (result == nullValue) {
-					throw CACHED_EXCEPTION;
+					throw new ClassNotFoundException();
 				}
 				return result;
 			}
@@ -92,7 +92,7 @@ public class BundleSpace {
 				cache.put(name, result);
 			} else {
 				cache.put(name, NULL_CLASS);
-				throw CACHED_EXCEPTION;
+				throw new ClassNotFoundException();
 			}
 		}
 		return result;
