@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.lunifera.dsl.xtext.types.bundles.BundleSpace;
+import org.lunifera.runtime.common.types.IBundleSpace;
 import org.osgi.framework.Bundle;
 
 /**
@@ -72,5 +73,11 @@ public interface IMetadataBuilderService {
 	 * @param bundle
 	 */
 	void removeFromBundleSpace(Bundle bundle);
+	
+	/**
+	 * Returns the bundle space.
+	 * @return
+	 */
+	IBundleSpace getBundleSpace();
 
 }

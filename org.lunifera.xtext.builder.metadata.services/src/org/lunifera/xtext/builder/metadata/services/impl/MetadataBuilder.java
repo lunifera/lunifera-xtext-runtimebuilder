@@ -589,6 +589,13 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	}
 
 	/**
+	 * @return the bundleSpace
+	 */
+	public IBundleSpace getBundleSpace() {
+		return bundleSpace;
+	}
+
+	/**
 	 * An internal task that processes different kinds of issues.
 	 */
 	interface ITask {
