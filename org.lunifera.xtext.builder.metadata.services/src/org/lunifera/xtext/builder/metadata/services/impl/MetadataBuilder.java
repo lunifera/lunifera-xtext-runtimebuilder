@@ -242,7 +242,7 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 	 * Activates the given participant.
 	 * 
 	 * @param participant
-	 */
+	 */ 
 	private void doActivateParticipant(IBuilderParticipant participant) {
 		if (isActive()) {
 			// Tell the participant to initialize its state
@@ -510,6 +510,15 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 
 		LOGGER.info("Models resolved. In case of error, see messages before.");
 	}
+	
+	
+	private void doNotifyParticipantsBundlesScanned() {
+		synchronized (participants) {
+			for (IBuilderParticipant participant : participants) {
+				participant.notifyLifecyle(new LifecycleEvent(LifecycleEvent.BUNDLES_SCANNED));;
+			}
+		}
+	}
 
 	private void doInitializeParticipant(IBuilderParticipant participant) {
 		participant
@@ -707,6 +716,9 @@ public class MetadataBuilder implements BundleListener, IMetadataBuilderService 
 		@Override
 		public void run() {
 			doScanAllBundles();
+			
+			doNotifyParticipantsBundlesScanned();
+			
 			startBundleTracking();
 
 			resolved.set(true);

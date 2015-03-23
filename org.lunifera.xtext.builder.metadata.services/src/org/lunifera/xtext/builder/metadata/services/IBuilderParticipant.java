@@ -55,7 +55,8 @@ public interface IBuilderParticipant {
 	class LifecycleEvent {
 		public static final int INITIALIZE = 10;
 		public static final int ACTIVATED = 20;
-		public static final int DEACTIVATED = 30;
+		public static final int BUNDLES_SCANNED = 30;
+		public static final int DEACTIVATED = 40;
 
 		private int state;
 
