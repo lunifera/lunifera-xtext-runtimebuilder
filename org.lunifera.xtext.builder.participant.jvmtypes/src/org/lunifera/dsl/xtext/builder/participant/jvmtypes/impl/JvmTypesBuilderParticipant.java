@@ -61,7 +61,7 @@ public class JvmTypesBuilderParticipant extends AbstractBuilderParticipant {
 			JvmTypeService jvmTypeService = new JvmTypeService();
 			serviceRegister = context.getBundleContext().registerService(
 					IJvmTypeMetadataService.class, jvmTypeService, null);
-		} else {
+		} else if (event.getState() == IBuilderParticipant.LifecycleEvent.DEACTIVATED) {
 			if (serviceRegister != null) {
 				serviceRegister.unregister();
 				serviceRegister = null;

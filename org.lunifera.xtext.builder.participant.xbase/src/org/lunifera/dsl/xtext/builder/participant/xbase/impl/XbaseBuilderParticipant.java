@@ -98,7 +98,7 @@ public class XbaseBuilderParticipant extends AbstractBuilderParticipant {
 			XBaseService xbaseService = new XBaseService();
 			serviceRegister = context.getBundleContext().registerService(
 					IXbaseMetadataService.class, xbaseService, null);
-		} else {
+		} else if (event.getState() == IBuilderParticipant.LifecycleEvent.DEACTIVATED) {
 			if (serviceRegister != null) {
 				serviceRegister.unregister();
 				serviceRegister = null;
