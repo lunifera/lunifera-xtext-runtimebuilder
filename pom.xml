@@ -48,7 +48,7 @@
 		<module>org.lunifera.xtext.builder.xbase.setups</module>
 
 		<!-- External bundles for test -->
-		<module>org.eclipse.xtext.example.domainmodel</module>
+<!-- 		<module>org.eclipse.xtext.example.domainmodel</module> -->
 
 		<!-- Example for test -->
 		<module>org.lunifera.xtext.builder.participant.dmodelsample</module>
