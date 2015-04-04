@@ -15,12 +15,12 @@
 	<parent>
 		<groupId>org.lunifera.releng.maven</groupId>
 		<artifactId>lunifera-releng-maven-parent-tycho</artifactId>
-		<version>0.12.3-SNAPSHOT</version>
+		<version>0.12.5-SNAPSHOT</version>
 	</parent>
 
 	<groupId>org.lunifera.xtext.builder</groupId>
 	<artifactId>org.lunifera.xtext.builder.aggregator</artifactId>
-	<version>0.8.6</version>
+	<version>0.9.0</version>
 	<packaging>pom</packaging>
 
 	<url>${distribution.site.url}</url>
