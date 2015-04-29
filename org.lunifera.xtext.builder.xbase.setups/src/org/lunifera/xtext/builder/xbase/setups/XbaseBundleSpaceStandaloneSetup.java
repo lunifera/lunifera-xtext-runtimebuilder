@@ -15,7 +15,6 @@ import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-@SuppressWarnings("restriction")
 public class XbaseBundleSpaceStandaloneSetup extends XbaseStandaloneSetup {
 
 	public Injector createInjector() {

@@ -79,6 +79,7 @@ public class JdtTypeLoaderProvider implements IJdtTypeLoaderProvider {
 		return loader;
 	}
 
+	@SuppressWarnings("restriction")
 	private void cleanUp() {
 		while (true) {
 			Reference<? extends IProject> ref = referenceQueue.poll();
