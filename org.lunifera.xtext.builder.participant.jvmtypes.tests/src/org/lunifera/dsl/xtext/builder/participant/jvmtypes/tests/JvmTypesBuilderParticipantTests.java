@@ -49,12 +49,13 @@ public class JvmTypesBuilderParticipantTests {
 	private Bundle builderBundle;
 
 	@Before
-	public void setup() throws BundleException {
+	public void setup() throws BundleException, InterruptedException {
 
 		setDefaultBundleContext(Activator.context);
 
 		extenderBundle = findBundle(Activator.context, BUNDLE_EXTENDER);
 		extenderBundle.stop();
+		Thread.sleep(TIME_1000);
 
 		// restart the metadata service
 		builderBundle = findBundle(Activator.context, BUNDLE_METADATA_SERVICE);
@@ -145,6 +146,11 @@ public class JvmTypesBuilderParticipantTests {
 		assertNotNull(builderService);
 		assertNotNull(service);
 
+		extenderBundle.start();
+		Thread.sleep(TIME_500);
+		extenderBundle.stop();
+		Thread.sleep(TIME_1000);
+		
 		// then load class
 		JvmType testClass = service.getJvmType(EXTENDER_CLASS);
 		assertNull(testClass);

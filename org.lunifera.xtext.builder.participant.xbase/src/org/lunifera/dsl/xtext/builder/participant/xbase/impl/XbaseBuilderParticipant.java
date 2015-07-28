@@ -68,14 +68,16 @@ public class XbaseBuilderParticipant extends AbstractBuilderParticipant {
 
 		List<URL> results = new ArrayList<URL>();
 		BundleWiring wiring = suspect.adapt(BundleWiring.class);
-		results.addAll(wiring.findEntries("/", "*.xtext",
-				BundleWiring.LISTRESOURCES_RECURSE));
-		results.addAll(wiring.findEntries("/", "*.___xtype",
-				BundleWiring.LISTRESOURCES_RECURSE));
-		results.addAll(wiring.findEntries("/", "*.___xbase",
-				BundleWiring.LISTRESOURCES_RECURSE));
-		results.addAll(wiring.findEntries("/", "*.___xbasewithannotations",
-				BundleWiring.LISTRESOURCES_RECURSE));
+		if (wiring != null) {
+			results.addAll(wiring.findEntries("/", "*.xtext",
+					BundleWiring.LISTRESOURCES_RECURSE));
+			results.addAll(wiring.findEntries("/", "*.___xtype",
+					BundleWiring.LISTRESOURCES_RECURSE));
+			results.addAll(wiring.findEntries("/", "*.___xbase",
+					BundleWiring.LISTRESOURCES_RECURSE));
+			results.addAll(wiring.findEntries("/", "*.___xbasewithannotations",
+					BundleWiring.LISTRESOURCES_RECURSE));
+		}
 
 		Set<String> fragments = new HashSet<String>();
 		for (Iterator<URL> iterator = results.iterator(); iterator.hasNext();) {
