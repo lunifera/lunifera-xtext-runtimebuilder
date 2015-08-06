@@ -92,11 +92,11 @@
 			</plugin>
 		</plugins>
 	</build>
-	<dependencies>
-		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>com.springsource.org.hamcrest.core</artifactId>
-			<version>1.1.0</version>
-		</dependency>
-	</dependencies>
+<!-- 	<dependencies> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.hamcrest</groupId> -->
+<!-- 			<artifactId>com.springsource.org.hamcrest.core</artifactId> -->
+<!-- 			<version>1.1.0</version> -->
+<!-- 		</dependency> -->
+<!-- 	</dependencies> -->
 </project>
